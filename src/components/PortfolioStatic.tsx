@@ -18,24 +18,26 @@ function FadeIn({ children, className = '', delay = 0, ...rest }: { children: Re
 }
 
 /* ── Config ── */
+const base = import.meta.env.BASE_URL;
+const img = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const mapsUrl = 'https://maps.app.goo.gl/yoKBspd2fi23c9A26';
 const cvUrl = 'https://docs.google.com/document/d/1DgD3Q7C4jAC1WF4Il195zXL8jNVFMJse2WyTPQqSBhE/edit?tab=t.vspq59j4bol0';
 
 const projectVisuals: Record<string, { bg: string; bgLight: string; icon: LucideIcon; logo?: string }> = {
-  unitel: { bg: '#e8581c', bgLight: '#f4762e', icon: Wifi, logo: '/images/projects/unitel.png' },
-  vsale: { bg: '#d42020', bgLight: '#ef3434', icon: Smartphone, logo: '/images/projects/vsale.png' },
+  unitel: { bg: '#e8581c', bgLight: '#f4762e', icon: Wifi, logo: img('/images/projects/unitel.png') },
+  vsale: { bg: '#d42020', bgLight: '#ef3434', icon: Smartphone, logo: img('/images/projects/vsale.png') },
   phoenix: { bg: '#c67a1a', bgLight: '#e8952e', icon: CreditCard },
-  'hapa-kristin': { bg: '#eb6088', bgLight: '#f48aaa', icon: Search, logo: '/images/projects/hapa-kristin.png' },
-  'smart-info': { bg: '#1456a0', bgLight: '#2572cc', icon: Shield, logo: '/images/projects/mbbank.png' },
-  mymb: { bg: '#1456a0', bgLight: '#2572cc', icon: Zap, logo: '/images/projects/mbbank.png' },
-  vcm360: { bg: '#e83848', bgLight: '#f05868', icon: Users, logo: '/images/projects/vcm360.png' },
-  hellojob: { bg: '#2ca8d8', bgLight: '#4ec0e8', icon: Briefcase, logo: '/images/projects/hellojob.png' },
+  'hapa-kristin': { bg: '#eb6088', bgLight: '#f48aaa', icon: Search, logo: img('/images/projects/hapa-kristin.png') },
+  'smart-info': { bg: '#1456a0', bgLight: '#2572cc', icon: Shield, logo: img('/images/projects/mbbank.png') },
+  mymb: { bg: '#1456a0', bgLight: '#2572cc', icon: Zap, logo: img('/images/projects/mbbank.png') },
+  vcm360: { bg: '#e83848', bgLight: '#f05868', icon: Users, logo: img('/images/projects/vcm360.png') },
+  hellojob: { bg: '#2ca8d8', bgLight: '#4ec0e8', icon: Briefcase, logo: img('/images/projects/hellojob.png') },
 };
 
 const companyInfo: Record<string, { logo: string; url: string }> = {
-  BES: { logo: '/images/companies/bes.png', url: 'https://besgroup.vn/' },
-  'CMC Global': { logo: '/images/companies/cmc-global.svg', url: 'https://cmcglobal.com.vn/' },
-  'AHT Tech': { logo: '/images/companies/aht-tech.svg', url: 'https://www.arrowhitech.com/' },
+  BES: { logo: img('/images/companies/bes.png'), url: 'https://besgroup.vn/' },
+  'CMC Global': { logo: img('/images/companies/cmc-global.svg'), url: 'https://cmcglobal.com.vn/' },
+  'AHT Tech': { logo: img('/images/companies/aht-tech.svg'), url: 'https://www.arrowhitech.com/' },
 };
 
 const navItems = [
@@ -159,7 +161,7 @@ export function PortfolioStatic() {
                   {/* Glow ring */}
                   <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72] opacity-20 blur-xl" />
                   <div className="relative h-full w-full overflow-hidden rounded-full p-[3px] bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72]">
-                    <img src="/images/avatar.jpeg" alt={portfolioData.name} className="h-full w-full rounded-full object-cover" />
+                    <img src={img('/images/avatar.jpeg')} alt={portfolioData.name} className="h-full w-full rounded-full object-cover" />
                   </div>
                 </div>
                 {/* Available badge - prominent */}
