@@ -2,6 +2,7 @@ export interface Project {
   id: string;
   name: string;
   company: string;
+  client?: string;
   time: string;
   role: string;
   teamSize: string;
@@ -11,7 +12,8 @@ export interface Project {
   languages: string[];
   technologies: string[];
   platform: string[];
-  image: string;
+  image?: string;
+  modules?: string[];
   links?: {
     web?: string;
     googlePlay?: string;
@@ -28,9 +30,30 @@ export interface Experience {
   achievements: string[];
 }
 
+export interface WorkHistory {
+  id: string;
+  company: string;
+  role: string;
+  period: string;
+  summary: string;
+}
+
 export interface SkillGroup {
   category: string;
   skills: string[];
+}
+
+export interface TechnicalSkillRow {
+  category: string;
+  skills: string;
+}
+
+export interface EducationEntry {
+  institution: string;
+  period: string;
+  details: string[];
+  certificate?: string;
+  award?: string;
 }
 
 export interface PortfolioData {
@@ -39,10 +62,16 @@ export interface PortfolioData {
   tagline: string;
   about: string;
   summary: string;
+  professionalSummary: string;
+  careerGoal: string;
   yearsOfExperience: number;
   email: string;
   phone?: string;
   location: string;
+  address: string;
+  gender: string;
+  dateOfBirth: string;
+  pubDev: string;
   stats: {
     yearsOfExperience: number;
     projectsCompleted: number;
@@ -50,10 +79,14 @@ export interface PortfolioData {
   socials: {
     github: string;
     linkedin: string;
+    pubDev: string;
     twitter?: string;
   };
   skills: SkillGroup[];
+  technicalSkillsTable: TechnicalSkillRow[];
   experience: Experience[];
+  workHistory: WorkHistory[];
+  education: EducationEntry[];
   projects: Project[];
   achievements: string[];
 }
@@ -61,283 +94,374 @@ export interface PortfolioData {
 export const portfolioData: PortfolioData = {
   name: "Tran Dinh Nam",
   title: "Flutter Developer | Mobile & Cross-Platform Specialist",
-  tagline: "Building scalable, high-performance applications with 4+ years of expertise in Flutter & Native integration.",
-  about: "With over 4 years of experience in software development, I have worked on a variety of mobile and web applications, leveraging both native technologies (Java for Android) and cross-platform frameworks, with a strong focus on Flutter. I specialize in building scalable, high-performance applications and integrating third-party services to enhance user experience. I am experienced across the full development lifecycle, from design and development to testing and deployment, with a strong commitment to code quality and best practices.",
-  summary: "With over 4 years of experience in software development, I have worked on a variety of mobile and web applications, leveraging both native technologies (Java for Android) and cross-platform frameworks, with a strong focus on Flutter. I specialize in building scalable, high-performance applications and integrating third-party services to enhance user experience.",
+  tagline: "Over 4 years of experience shipping Flutter, native mobile, and super-app solutions for enterprise teams.",
+  about:
+    "Tran Dinh Nam is a Flutter developer focused on mobile and cross-platform delivery, native integration, and product-minded engineering. He has worked across the full software lifecycle, from discovery and architecture to development, testing, release, and post-launch support.",
+  summary:
+    "Over 4 years of experience in software development across mobile and web applications, leveraging native technologies (Java for Android) and cross-platform frameworks, with a strong focus on Flutter.",
+  professionalSummary:
+    "Over 4 years of experience in software development across mobile and web applications, leveraging native technologies (Java for Android) and cross-platform frameworks, with a strong focus on Flutter. Specializes in building scalable, high-performance applications and integrating third-party services. Experienced across the full development lifecycle (design, development, testing, deployment).",
+  careerGoal: "Career goal: grow into a Product Manager role within 3 years.",
   yearsOfExperience: 4,
   email: "trandinhnamnd0102@gmail.com",
   phone: "0395.212.072",
   location: "Ha Noi, Vietnam",
+  address: "245 Duong Lac Long Quan, Bai An, Nghia Do, Ha Noi, Vietnam",
+  gender: "Male",
+  dateOfBirth: "20/01/2002",
+  pubDev: "https://pub.dev/my-packages",
   stats: {
     yearsOfExperience: 4,
-    projectsCompleted: 15,
+    projectsCompleted: 8,
   },
   socials: {
     github: "https://github.com/NamTranDinh",
     linkedin: "https://www.linkedin.com/in/trandinham20102",
+    pubDev: "https://pub.dev/my-packages",
   },
   skills: [
     {
       category: "Core Flutter & State Management",
-      skills: ["Flutter", "Dart", "Provider", "Bloc / Cubit", "GetX", "Riverpod", "Dio", "Http", "Flutter DevTools"],
+      skills: ["Provider", "Bloc", "Dio", "Http", "Flutter DevTools", "Crashlytics", "Unit Testing", "Widget Testing", "Integration Testing"],
     },
     {
       category: "AI-Assisted Development",
       skills: ["Claude", "ChatGPT", "Cursor", "AntiGravity", "GitHub Copilot"],
     },
     {
-      category: "Native Integration",
-      skills: ["Java (Android)", "Kotlin", "Swift (iOS)", "Objective-C", "Platform Channels", "FFI", "NFC", "eKYC"],
+      category: "Native Integration & Platform SDKs",
+      skills: ["Flutter to Android (Java/Kotlin)", "Flutter to iOS (Swift/Objective-C)", "Platform Channels", "FFI", "Firebase", "Insider", "Deep Linking", "Alibaba Cloud", "NFC", "eKYC", "Video Call SDK"],
     },
     {
       category: "Mini App & Super App",
-      skills: ["Super App Architecture", "Mini App Runtime", "Isolated Lifecycle", "Inter-app Communication"],
+      skills: ["Super Mini App Architecture", "Mini App Runtime", "Sandboxed Sub-Apps", "Inter-App Communication", "Permission Scoping"],
     },
     {
-      category: "Cloud & Infrastructure",
-      skills: ["AWS", "Azure", "GCP", "Firebase", "Alibaba Cloud", "CI/CD", "Docker"],
+      category: "Cloud, Infrastructure & Deployment",
+      skills: ["AWS", "Azure", "GCP", "Alibaba Cloud", "Amazon S3", "GitLab CI/CD", "Argo CD", "Jenkins", "Docker"],
     },
     {
       category: "Process & Collaboration",
-      skills: ["Agile/Scrum", "Jira", "Trello", "Redmine", "GitLab", "GitHub"],
+      skills: ["Agile/Scrum", "Jira", "Trello", "Redmine", "Requirements Analysis", "Remote Team Collaboration", "Outsourcing"],
+    },
+  ],
+  technicalSkillsTable: [
+    {
+      category: "Languages",
+      skills: "Dart/Flutter (4+ yrs), Java Android (1 yr), Swift/SwiftUI (working), JavaScript/React Native (working), Java/Spring Boot (working)",
+    },
+    {
+      category: "Development Tools",
+      skills: "GitHub, GitLab, GCP Source Repositories (4+ yrs), Figma",
+    },
+    {
+      category: "API Testing",
+      skills: "Postman (4+ yrs), Swagger (4+ yrs)",
+    },
+    {
+      category: "Deployment",
+      skills: "App Store, Google Play (1+ yr), CI/CD (6 months)",
+    },
+    {
+      category: "AI Tools",
+      skills: "Claude, ChatGPT, GitHub Copilot, Cursor, AntiGravity",
+    },
+    {
+      category: "Architecture",
+      skills: "Clean Architecture, MVVM, Modularization, Micro App / Super App",
+    },
+    {
+      category: "Management",
+      skills: "Agile/Scrum, Jira, Trello",
+    },
+    {
+      category: "English",
+      skills: "Intermediate - basic communication, read documents, chat with customers",
     },
   ],
   experience: [
     {
-      id: "exp1",
+      id: "exp-bes",
       company: "BES",
       role: "Software Developer",
       period: "05/2024 - Present",
       responsibilities: [
-        "Developing high-performance mobile applications using Flutter.",
-        "Integrating complex third-party SDKs and native modules.",
+        "Contribute to Flutter-based mobile delivery and ongoing feature work.",
+        "Integrate native modules and third-party SDKs when project requirements demand it.",
       ],
-      achievements: [
-        "Successfully delivered key features for enterprise-level applications.",
-      ],
+      achievements: ["Support enterprise delivery with stable release execution and code quality."],
     },
     {
-      id: "exp2",
+      id: "exp-cmc",
       company: "CMC Global",
       role: "Software Developer",
       period: "04/2024 - 05/2024",
       responsibilities: [
-        "Contributed to mobile development projects for international clients.",
+        "Support cross-functional delivery for international client requirements.",
+        "Adapt quickly to existing architecture, team process, and short delivery windows.",
       ],
-      achievements: [
-        "Quickly adapted to project requirements and delivered high-quality code.",
-      ],
+      achievements: ["Delivered work in a fast-moving environment with a short onboarding window."],
     },
     {
-      id: "exp3",
+      id: "exp-aht",
       company: "AHT Tech",
       role: "Software Developer",
       period: "05/2022 - 04/2024",
       responsibilities: [
-        "Worked on multiple Flutter and React Native projects.",
-        "Collaborated with cross-functional teams in an Agile environment.",
+        "Work on mobile delivery across Flutter and related cross-platform stacks.",
+        "Collaborate with product, QA, and backend teams inside Agile processes.",
       ],
-      achievements: [
-        "Led mobile development for several high-profile client projects.",
+      achievements: ["Built the foundation for 4+ years of hands-on product delivery."],
+    },
+  ],
+  workHistory: [
+    {
+      id: "work-bes",
+      company: "BES",
+      role: "Software Developer",
+      period: "05/2024 - Present",
+      summary: "Flutter delivery, native SDK integration, and enterprise mobile support.",
+    },
+    {
+      id: "work-cmc",
+      company: "CMC Global",
+      role: "Software Developer",
+      period: "04/2024 - 05/2024",
+      summary: "Short-cycle delivery for international client work and team onboarding.",
+    },
+    {
+      id: "work-aht",
+      company: "AHT Tech",
+      role: "Software Developer",
+      period: "05/2022 - 04/2024",
+      summary: "Flutter and cross-platform product delivery in Agile teams.",
+    },
+  ],
+  education: [
+    {
+      institution: "Aptech Computer Education",
+      period: "2020 - 2023",
+      details: [
+        "Term 1: HTML5, CSS3, JavaScript, PHP, SQL Server",
+        "Term 2: Java, Spring Boot, JSP, Hibernate",
+        "Term 3: .NET Core, C#, Entity Framework",
+        "Term 4: Java, Android SDK, Firebase",
       ],
+      certificate: "Advanced Diploma in Software Engineering (ADSE) - 04/2023",
+      award: "3rd place - Techwiz 3 (Aptech Global) for innovative mobile application",
     },
   ],
   projects: [
     {
-      id: "vsale-super-app",
+      id: "unitel",
       name: "Unitel",
       company: "Viettel Telecom - Vietnam",
-      time: "05/2025 – 03/2026",
+      client: "Unitel Group",
+      time: "05/2025 - 03/2026",
       role: "Team Leader + Developer",
-      teamSize: "3 developers, 1 tester, 2 BAs, 1 PM + external OS team",
-      description: "Super App platform for Unitel Group delivering integrated multi-service solutions with a mini-app ecosystem across Laos.",
-      highlight: "Built super app core + mini-app architecture",
+      teamSize: "3 devs, 1 tester, 2 BAs, 1 PM + external OS team",
+      description: "Super App for Unitel Group (Laos) - a multi-service platform with a mini-app ecosystem.",
+      highlight: "Led super app core delivery and mini-app architecture.",
       responsibilities: [
-        "Led and mentored 3-person dev team, handled code reviews and architecture decisions",
-        "Developed Super App core using Flutter with native iOS (Objective-C) and Android (Kotlin)",
-        "Integrated Firebase, Alibaba Cloud, Insider, Deeptab",
-        "Implemented mini-app ecosystem using React JS with isolated lifecycle",
-        "Built communication layer between mini-app and super app",
-        "Integrated social login (Apple, Google, Facebook)",
-        "Managed release cycles and deployments"
+        "Led and mentored a 3-person development team, including task assignment, code reviews, and architectural decisions.",
+        "Architected the Super App core with Flutter plus native iOS (Objective-C) and Android (Kotlin) integrations.",
+        "Integrated Firebase Analytics, Crashlytics, and Remote Config with Alibaba Cloud OSS, Push, and MQTT.",
+        "Connected Insider and Deeptab services for product growth and engagement workflows.",
+        "Built the native bridge for mini-app to super-app data communication.",
+        "Built the mini-app ecosystem with React JS, isolated lifecycle, and inter-app communication.",
+        "Implemented Apple Sign-In, Google, and Facebook social login.",
+        "Managed release cycles for App Store and Google Play deliveries.",
       ],
       languages: ["Dart", "Kotlin", "Objective-C", "JavaScript (React)"],
       technologies: ["Flutter", "Firebase", "Alibaba Cloud", "Insider", "Deeptab", "Platform Channels", "React", "Mini-App Architecture"],
       platform: ["Android", "iOS"],
-      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop",
       links: {
         appStore: "https://apps.apple.com/app/unitel-group/id1286779842",
-        googlePlay: "https://play.google.com/store/apps/details?id=com.vtg.app.myunitel"
-      }
+        googlePlay: "https://play.google.com/store/apps/details?id=com.vtg.app.myunitel",
+      },
     },
     {
-      id: "vsale-micro-app",
-      name: "Vsale Micro-App System",
+      id: "vsale",
+      name: "Vsale",
       company: "Viettel Telecom - Vietnam",
-      time: "05/2025 – 03/2026",
+      client: "Viettel Telecom",
+      time: "05/2025 - 03/2026",
       role: "Team Leader + Developer",
-      teamSize: "3 developers, 1 tester, 2 BAs, 1 PM + external OS team",
-      description: "Enterprise sales and customer care system with multiple micro-app modules and deep native integrations.",
-      highlight: "Designed micro-app isolation & hot deployment",
+      teamSize: "3 devs, 1 tester, 2 BAs, 1 PM + external OS team",
+      description: "Internal business app for Viettel sales and customer care, deployed as a micro-app module.",
+      highlight: "Designed micro-app isolation and native SDK bridging.",
       responsibilities: [
-        "Evaluated eKYC, NFC, video call SDKs for micro-app architecture",
-        "Led development of 10+ business modules",
-        "Designed micro-app isolation strategy",
-        "Integrated Flutter with native SDKs",
-        "Optimized performance and reduced cold start time",
-        "Managed App Store & Google Play releases",
-        "Handled sprint planning and Jira tracking"
+        "Evaluated and selected third-party libraries for eKYC, NFC, and video call integrations.",
+        "Led development across more than 10 business modules in the micro-app architecture.",
+        "Designed module isolation for independent development, testing, and hot-deployment.",
+        "Ran weekly code reviews with Viettel's technical team.",
+        "Broke down epics into Jira tasks, tracked sprint velocity, and managed backlog.",
+        "Translated blockers into business updates and negotiated realistic timelines with PMs.",
+        "Integrated eKYC and NFC identity verification for regulatory compliance.",
+        "Optimized performance with Flutter DevTools, focusing on frame drops and cold start time.",
+        "Managed App Store and Google Play release cycles, provisioning, versioning, and Crashlytics monitoring.",
       ],
       languages: ["Dart"],
       technologies: ["Flutter", "eKYC", "NFC"],
       platform: ["Android", "iOS"],
-      image: "https://images.unsplash.com/photo-1551288049-bbbda536339a?q=80&w=2070&auto=format&fit=crop",
+      modules: [
+        "Prepaid/Postpaid Info",
+        "Register Information",
+        "Standardize",
+        "Mobile Connection",
+        "Confirm Usage",
+        "Subscriber Conversion",
+        "SIM Switch",
+        "Network Switch",
+        "Subscription Changes",
+      ],
       links: {
-        appStore: "https://apps.apple.com/vn/app/vsale/id6740941404",
-        googlePlay: "https://play.google.com/store/apps/details?id=com.viettel.vsale"
-      }
+        appStore: "https://apps.apple.com/vn/app/vsale/id6740941404?l=vi",
+        googlePlay: "https://play.google.com/store/apps/details?id=com.viettel.vsale&hl=vi",
+      },
     },
     {
-      id: "phoenix-financial",
-      name: "Phoenix Financial System",
+      id: "phoenix",
+      name: "Phoenix",
       company: "OFIS - Singapore",
-      time: "06/2024 – 04/2025",
+      client: "OFIS",
+      time: "06/2024 - 04/2025",
       role: "Developer",
-      teamSize: "6 developers, 1 tester, 1 BA, 1 DevOps, 1 PM, 1 Tech Lead",
-      description: "Online financial system for managing and generating payment requests with real-time collaboration.",
-      highlight: "Built real-time financial workflow system",
+      teamSize: "6 devs, 1 tester, 1 BA, 1 DevOps, 1 PM, 1 Tech Lead",
+      description: "Online financial system for managing and generating payment requests for the office department.",
+      highlight: "Bootstrapped the Flutter project and real-time workflow foundation.",
       responsibilities: [
-        "Bootstrapped Flutter project with DI and multi-env setup",
-        "Integrated Socket.io for real-time collaboration",
-        "Implemented Azure AD SSO with RBAC",
-        "Built payment request workflows",
-        "Configured CI/CD with GitLab and Argo CD",
-        "Integrated Amazon S3 for file handling",
-        "Proposed Kafka for async processing"
+        "Bootstrapped the Flutter project from zero with DI, environment configs for DEV/UAT/PROD, and team conventions.",
+        "Integrated Socket.io for real-time collaboration, including reconnection logic and UI state sync.",
+        "Implemented Azure AD SSO with token refresh and role-based access control.",
+        "Built the core payment request module with form validation, approval workflows, and multi-level authorization.",
+        "Created GitLab CI/CD and Argo CD pipelines for automated builds and DEV-to-UAT promotion.",
+        "Integrated Amazon S3 for document storage, pre-signed URLs, upload progress, and large-file handling.",
+        "Raised effort estimates and scope risks to the Tech Lead.",
+        "Proposed Spring Kafka for async processing of high-volume payment events.",
+        "Kept daily async updates and weekly syncs with PM and Tech Lead.",
       ],
       languages: ["Dart", "Java"],
-      technologies: ["Spring Boot", "Spring Kafka", "Microservices", "GitLab CI/CD", "Azure AD", "Socket.io", "Docker", "Amazon S3"],
+      technologies: ["Spring Boot", "Spring JPA", "Spring Kafka", "Microservice", "GitLab CI/CD", "Azure AD", "Socket.io", "Docker", "Amazon S3", "Argo CD", "Cloudflare"],
       platform: ["Web"],
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2070&auto=format&fit=crop",
       links: {
-        web: "https://phoenix-dev.orientfutures.com.sg/"
-      }
+        web: "https://phoenix-dev.orientfutures.com.sg/",
+      },
     },
     {
       id: "hapa-kristin",
-      name: "Hapa Kristin E-commerce",
+      name: "Hapa Kristin",
       company: "Korea",
-      time: "04/2024 – 06/2024",
-      role: "Solo Developer",
-      teamSize: "1 developer",
-      description: "E-commerce platform for contact lenses with maps, booking, and payment features.",
-      highlight: "Delivered full product solo (mobile + web)",
+      client: "Hapa Kristin",
+      time: "04/2024 - 06/2024",
+      role: "Developer (Solo)",
+      teamSize: "1 developer, 1 BA, 1 PM",
+      description: "E-commerce app for contact lenses with store locations on Google Maps, online orders, appointments, and payments.",
+      highlight: "Delivered the full product end-to-end as a solo developer.",
       responsibilities: [
-        "Worked directly with Korean client",
-        "Built full app end-to-end",
-        "Integrated Google Maps, Stripe, Firebase",
-        "Delivered both mobile and web platforms"
+        "Worked directly with the Korean client and gathered requirements end-to-end.",
+        "Delivered the full app independently, from planning to production release.",
+        "Integrated Google Maps API, Stripe payments, and Firebase within Flutter and Vue.js.",
+        "Shipped mobile and web platforms with feature parity while managing scope and timelines.",
       ],
       languages: ["Dart", "JavaScript (Vue.js)"],
-      technologies: ["Firebase", "Google Maps API", "Stripe"],
+      technologies: ["Firebase", "Google Maps API", "Stripe Payment"],
       platform: ["Android", "iOS", "Web"],
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop",
       links: {
+        googlePlay: "https://play.google.com/store/apps/details?id=en.app.hapakristin&hl=vi",
         web: "https://hapakristin.us/home",
-        googlePlay: "https://play.google.com/store/apps/details?id=en.app.hapakristin"
-      }
+      },
     },
     {
       id: "smart-info",
       name: "Smart Info",
       company: "MB Bank - Vietnam",
-      time: "06/2023 – 04/2024",
+      client: "MB Bank",
+      time: "06/2023 - 04/2024",
       role: "Team Leader + Developer",
-      teamSize: "10 developers, 2 testers, 1 BA, 1 DevOps, 1 PM, 1 Tech Lead",
-      description: "Internal application for managing customer and partner information for MB Bank executives.",
-      highlight: "Handled high-security banking system",
+      teamSize: "10 devs, 2 testers, 1 BA, 1 DevOps, 1 PM, 1 Tech Lead",
+      description: "Internal app for MB Bank that stores and provides customer, partner, and event information for senior bank leaders.",
+      highlight: "Delivered a secure banking solution that passed penetration testing.",
       responsibilities: [
-        "Designed architecture meeting strict security requirements",
-        "Coordinated with MB Bank internal APIs",
-        "Managed 10-developer team",
-        "Passed penetration testing",
-        "Supported production deployment"
+        "Architected the project structure to match MB Bank's strict internal security and compliance requirements.",
+        "Coordinated with the bank's engineering team to access proprietary APIs.",
+        "Managed a 10-developer team with task assignment, progress tracking, and blocker resolution.",
+        "Hardened authentication flows, encryption, and API layers to pass penetration testing.",
+        "Supported staging and production deployment with post-release monitoring.",
       ],
-      languages: ["Dart", "C#"],
+      languages: ["Dart", "C# (.NET)"],
       technologies: ["Firebase", "Amazon S3", "Docker", "Jenkins"],
       platform: ["Android", "iOS"],
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2070&auto=format&fit=crop"
     },
     {
-      id: "mymb-super-app",
-      name: "MyMB Super App Modules",
+      id: "mymb",
+      name: "My MB",
       company: "MB Bank - Vietnam",
-      time: "08/2023 – 03/2024",
-      role: "Team Leader + Fullstack Developer",
-      teamSize: "10 developers, 2 testers, 1 BA, 1 DevOps, 1 PM, 1 Tech Lead",
-      description: "Super app with mini-app modules including asset management and vehicle booking.",
-      highlight: "Built mini-app modules with custom SDK",
+      client: "MB Bank",
+      time: "08/2023 - 03/2024",
+      role: "Team Leader + FE Developer + BE Developer",
+      teamSize: "10 devs, 2 testers, 1 BA, 1 DevOps, 1 PM, 1 Tech Lead",
+      description: "MB's Super App using a custom SDK with mini-app modules for asset and vehicle management.",
+      highlight: "Delivered mini-app modules on top of a proprietary banking SDK.",
       responsibilities: [
-        "Developed Inventory Assets and Vehicle Manager modules",
-        "Integrated PAM and Socket.IO",
-        "Built Spring Boot APIs",
-        "Handled both frontend and backend",
-        "Passed security pentest"
+        "Built Inventory Assets and Vehicle Manager mini-apps using MB's proprietary SDK.",
+        "Integrated PAM system and Socket.IO for real-time vehicle booking and QR-based asset tracking.",
+        "Balanced legacy feature maintenance with new module delivery.",
+        "Designed Spring Boot REST APIs for the Inventory Assets module, covering both frontend and backend work.",
+        "Passed MB Bank's security penetration tests for both modules.",
       ],
-      languages: ["Dart", "Java"],
-      technologies: ["Spring Boot", "Socket.IO", "Jenkins"],
+      languages: ["Dart", "Java (Spring Boot)"],
+      technologies: ["MB SDK", "Dart Server", "Socket.IO", "PAM System", "Jenkins"],
       platform: ["Android", "iOS", "Web"],
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
     },
     {
       id: "vcm360",
       name: "Vcm360",
-      company: "Viettel - Vietnam",
-      time: "02/2023 – 10/2023",
+      company: "Viettel Group - Vietnam",
+      client: "Viettel Group",
+      time: "02/2023 - 10/2023",
       role: "Team Leader + Developer",
-      teamSize: "8 developers, 1 tester, 1 BA, 1 PM, 1 Tech Lead",
-      description: "Internal platform for employee engagement and recruitment within Viettel.",
-      highlight: "Built CMS + mobile system",
+      teamSize: "8 devs, 1 tester, 1 BA, 1 PM, 1 Tech Lead",
+      description: "Internal app for Viettel Group employees to share opinions and apply or recommend candidates for internal job postings.",
+      highlight: "Delivered the CMS web interface and mobile experience together.",
       responsibilities: [
-        "Defined coding standards",
-        "Developed recruitment modules",
-        "Built CMS web system",
-        "Managed full release pipeline"
+        "Set up the project baseline and coding standards for an 8-developer team across mobile and web.",
+        "Led the Viettel Perspective and Internal Recruitment modules from UI to API.",
+        "Built the CMS web interface for administrators.",
+        "Owned the release pipeline for App Store, Google Play, versioning, and QA sign-off.",
       ],
-      languages: ["Dart", "Java"],
+      languages: ["Dart", "Java (Spring Boot)"],
       technologies: ["Firebase", "Docker", "Amazon S3"],
       platform: ["Android", "iOS", "Web"],
-      image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop",
       links: {
         web: "https://vcm360.merket.io/",
+        googlePlay: "https://play.google.com/store/apps/details?id=com.aht.vcm360&hl=vi",
         appStore: "https://apps.apple.com/us/app/vcm-360/id6468552995",
-        googlePlay: "https://play.google.com/store/apps/details?id=com.aht.vcm360"
-      }
+      },
     },
     {
       id: "hellojob",
       name: "HelloJob",
       company: "Japan",
-      time: "05/2022 – 03/2023",
+      client: "HelloJob",
+      time: "05/2022 - 03/2023",
       role: "Developer",
-      teamSize: "8 developers, 2 testers, 1 BA, 1 PM, 1 Tech Lead",
-      description: "Job marketplace app connecting employers and candidates.",
-      highlight: "Implemented real-time job search & matching",
+      teamSize: "8 devs, 2 testers, 1 BA, 1 PM, 1 Tech Lead",
+      description: "App connecting employers and job seekers through continuously updated job listings.",
+      highlight: "Implemented search, matching, and notification flows for job discovery.",
       responsibilities: [
-        "Integrated Elastic Search",
-        "Built job matching system",
-        "Handled Firebase notifications",
-        "Delivered features in sprint cycles"
+        "Integrated Elastic Search for real-time job listing search with filtering and ranking.",
+        "Implemented job-matching features for employer listings, candidate applications, and Firebase notifications.",
+        "Contributed technical proposals and delivered features within sprint deadlines.",
       ],
       languages: ["Dart"],
       technologies: ["Firebase", "Elastic Search", "Amazon S3"],
       platform: ["Android", "iOS"],
-      image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2070&auto=format&fit=crop"
-    }
+    },
   ],
   achievements: [
-    "3rd Place in Techwiz 3 - Aptech Global",
-    "Advanced Diploma in Software Engineering (ADSE)",
-    "Top Contributor at Local Tech Community",
+    "3rd place - Techwiz 3 (Aptech Global) for innovative mobile application",
+    "Advanced Diploma in Software Engineering (ADSE) - 04/2023",
+    "4+ years of delivery across Flutter, native integration, and cross-platform systems",
   ],
 };
