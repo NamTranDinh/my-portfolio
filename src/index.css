@@ -47,6 +47,12 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .gh-gradient-gold {
+    background: linear-gradient(135deg, #fff3b0 0%, #f3c76b 45%, #d29922 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   .gh-gradient-line {
     background: linear-gradient(90deg, transparent, #58a6ff, #d2a8ff, #ff7b72, transparent);
   }
