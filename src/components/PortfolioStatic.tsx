@@ -90,6 +90,28 @@ const heroPlatformBadges: Array<{
   { top: '72%', left: '68%', rotate: 135, scale: 0.88, drift: 10, duration: 13.8, delay: 1.1, label: 'iOS', icon: 'ios' },
 ];
 
+const mobileHeroFloatingTokens = [
+  { text: 'flutter()', top: '10%', left: '8%', rotate: -12, drift: 5, duration: 8.5, delay: 0.4 },
+  { text: '<Widget />', top: '24%', left: '74%', rotate: 9, drift: 4, duration: 9.1, delay: 0.2 },
+  { text: 'BlocProvider', top: '60%', left: '6%', rotate: -8, drift: 5, duration: 8.9, delay: 0.7 },
+  { text: 'Dio + Http', top: '76%', left: '72%', rotate: 11, drift: 4, duration: 9.4, delay: 0.5 },
+];
+
+const mobileHeroPlatformBadges: Array<{
+  top: string;
+  left: string;
+  rotate: number;
+  scale: number;
+  drift: number;
+  duration: number;
+  delay: number;
+  label: string;
+  icon: 'flutter' | 'android' | 'ios';
+}> = [
+  { top: '16%', left: '70%', rotate: -10, scale: 0.8, drift: 5, duration: 10.8, delay: 0.2, label: 'Flutter', icon: 'flutter' },
+  { top: '66%', left: '76%', rotate: 8, scale: 0.8, drift: 5, duration: 11.4, delay: 0.5, label: 'iOS', icon: 'ios' },
+];
+
 /* ── Shared ── */
 function Tag({ children, ...rest }: { children: ReactNode } & HTMLAttributes<HTMLSpanElement>) {
   return <span {...rest} className="rounded-full border border-[#30363d] bg-[#161b22] px-3 py-1 text-xs text-[#c7d1de]">{children}</span>;
@@ -167,6 +189,7 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 export function PortfolioStatic() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [cursor, setCursor] = useState({ x: 0, y: 0 });
 
   // Experience is calculated from 05/2022 and rounded up to 0.5-year steps.
   const experienceStartDate = new Date(2022, 4, 1);
@@ -182,6 +205,15 @@ export function PortfolioStatic() {
     ? portfolioData.tagline.replace(/Over\s+\d+(?:[.,]\d+)?\s+years/i, `Over ${yearsText} years`)
     : `Over ${yearsText} years of experience shipping Flutter, native mobile, and super-app solutions for enterprise teams.`;
 
+  useEffect(() => {
+    const onMove = (event: MouseEvent) => {
+      setCursor({ x: event.clientX, y: event.clientY });
+    };
+
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#010409] text-[#e6edf3]">
       {/* Ambient */}
@@ -190,6 +222,12 @@ export function PortfolioStatic() {
         <div className="absolute -right-40 top-1/2 h-[400px] w-[400px] rounded-full bg-[#d2a8ff]/[0.03] blur-[100px]" />
         <div className="absolute -left-40 bottom-1/4 h-[350px] w-[350px] rounded-full bg-[#ff7b72]/[0.02] blur-[100px]" />
       </div>
+
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-0 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(88,166,255,0.25)_0%,rgba(88,166,255,0.09)_35%,transparent_72%)] opacity-55 blur-2xl mix-blend-screen md:block"
+        animate={{ x: cursor.x - 144, y: cursor.y - 144 }}
+        transition={{ type: 'tween', duration: 0.18, ease: 'linear' }}
+      />
 
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-[#21262d] bg-[#010409]/80 backdrop-blur-xl">
@@ -213,8 +251,42 @@ export function PortfolioStatic() {
 
       <main id="top">
         {/* ── Hero ── */}
-        <section className="relative overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <section className="relative isolate overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+            <div className="md:hidden">
+              {mobileHeroFloatingTokens.map((item) => (
+                <motion.div
+                  key={`mobile-${item.text}-${item.top}-${item.left}`}
+                  className="absolute rounded-full border border-white/8 bg-white/4 px-2.5 py-1 font-mono text-[10px] text-white/12 backdrop-blur-[1px]"
+                  style={{ top: item.top, left: item.left, transform: `rotate(${item.rotate}deg)` }}
+                  animate={{ y: [0, -item.drift, 0, item.drift, 0], x: [0, item.drift * 0.3, 0, -item.drift * 0.3, 0] }}
+                  transition={{ duration: item.duration, delay: item.delay, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  {item.text}
+                </motion.div>
+              ))}
+
+              {mobileHeroPlatformBadges.map((badge) => (
+                <motion.div
+                  key={`mobile-${badge.label}-${badge.top}-${badge.left}`}
+                  className="absolute flex items-center gap-1.5 rounded-xl border border-[#58a6ff]/16 bg-[#08111d]/45 px-2.5 py-1.5 shadow-[0_0_20px_rgba(88,166,255,0.08)] backdrop-blur"
+                  style={{ top: badge.top, left: badge.left, transform: `rotate(${badge.rotate}deg) scale(${badge.scale})` }}
+                  animate={{ y: [0, -badge.drift, 0, badge.drift, 0], x: [0, badge.drift * 0.25, 0, -badge.drift * 0.25, 0] }}
+                  transition={{ duration: badge.duration, delay: badge.delay, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  {badge.icon === 'flutter' ? (
+                    <FlutterMark className="h-4 w-4 drop-shadow-[0_0_8px_rgba(71,197,251,0.28)]" />
+                  ) : badge.icon === 'android' ? (
+                    <Smartphone className="h-3.5 w-3.5 text-[#79c0ff]/90" />
+                  ) : (
+                    <Apple className="h-3.5 w-3.5 text-[#79c0ff]/90" />
+                  )}
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#8cbcff]/85">{badge.label}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="hidden md:block">
             {heroFloatingTokens.map((item) => (
               <motion.div
                 key={`${item.text}-${item.top}-${item.left}`}
@@ -245,15 +317,16 @@ export function PortfolioStatic() {
                 <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8cbcff]">{badge.label}</span>
               </motion.div>
             ))}
+            </div>
           </div>
           {/* Top gradient line */}
           <div className="mx-auto h-px max-w-4xl gh-gradient-line" />
 
-          <motion.div className="mx-auto max-w-[1280px] px-6 py-20 md:py-32" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
+          <motion.div className="relative z-10 mx-auto max-w-[1280px] px-6 py-16 md:py-32" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
             <div className="flex flex-col items-center text-center">
               {/* Avatar - large & prominent */}
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1, duration: 0.5 }} className="relative">
-                <div className="relative h-40 w-40 md:h-52 md:w-52 lg:h-60 lg:w-60">
+                <div className="relative h-32 w-32 sm:h-40 sm:w-40 md:h-52 md:w-52 lg:h-60 lg:w-60">
                   {/* Glow ring */}
                   <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72] opacity-20 blur-xl" />
                   <div className="relative h-full w-full overflow-hidden rounded-full p-[3px] bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72]">
@@ -261,11 +334,11 @@ export function PortfolioStatic() {
                   </div>
                 </div>
                 {/* Available badge - prominent */}
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="absolute -bottom-4 left-1/2 -translate-x-1/2">
-                  <span className="flex w-max items-center gap-2.5 whitespace-nowrap rounded-full border border-[#58a6ff]/50 bg-[#010409]/95 px-5 py-2.5 text-sm font-bold tracking-wide text-[#79c0ff] shadow-[0_0_25px_rgba(88,166,255,0.25),0_0_50px_rgba(88,166,255,0.1)] ring-1 ring-[#58a6ff]/30 backdrop-blur-sm">
-                    <span className="relative flex h-3 w-3">
+                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="absolute -bottom-3 left-1/2 -translate-x-1/2 sm:-bottom-4">
+                  <span className="flex w-max items-center gap-2 whitespace-nowrap rounded-full border border-[#58a6ff]/50 bg-[#010409]/95 px-3.5 py-1.5 text-xs font-bold tracking-wide text-[#79c0ff] shadow-[0_0_25px_rgba(88,166,255,0.25),0_0_50px_rgba(88,166,255,0.1)] ring-1 ring-[#58a6ff]/30 backdrop-blur-sm sm:gap-2.5 sm:px-5 sm:py-2.5 sm:text-sm">
+                    <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#58a6ff] opacity-60" />
-                      <span className="relative inline-flex h-3 w-3 rounded-full bg-gradient-to-r from-[#58a6ff] to-[#79c0ff] shadow-[0_0_6px_rgba(88,166,255,0.6)]" />
+                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#58a6ff] to-[#79c0ff] shadow-[0_0_6px_rgba(88,166,255,0.6)] sm:h-3 sm:w-3" />
                     </span>
                     Available for work
                   </span>
@@ -273,44 +346,44 @@ export function PortfolioStatic() {
               </motion.div>
 
               {/* Greeting */}
-              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-12 font-display text-5xl font-extrabold leading-[1.1] tracking-tight md:text-6xl lg:text-7xl">
+              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-10 font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:mt-12 md:text-6xl lg:text-7xl">
                 Hey, I'm{' '}<span className="gh-gradient-text">{portfolioData.name.split(' ').pop()}</span>
                 <span className="ml-2 inline-block animate-[wave_1.5s_ease-in-out_infinite] origin-[70%_70%]">👋</span>
               </motion.h1>
 
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="mt-6 max-w-2xl text-lg leading-relaxed text-[#c7d1de] md:text-xl">
+              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="mt-5 max-w-2xl text-base leading-relaxed text-[#c7d1de] sm:mt-6 sm:text-lg md:text-xl">
                 {dynamicTagline}
               </motion.p>
 
               {/* Stats inline */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mt-8 flex items-center gap-8">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mt-7 flex w-full max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:mt-8 sm:gap-8">
                 <div className="text-center">
                   <p className="font-display text-3xl font-bold gh-gradient-text">{yearsStatText}</p>
                   <p className="text-xs text-[#9bacbf]">Years</p>
                 </div>
-                <div className="h-10 w-px bg-[#21262d]" />
+                <div className="hidden h-10 w-px bg-[#21262d] sm:block" />
                 <div className="text-center">
                   <p className="font-display text-3xl font-bold gh-gradient-text">{portfolioData.stats.projectsCompleted}+</p>
                   <p className="text-xs text-[#9bacbf]">Projects</p>
                 </div>
-                <div className="h-10 w-px bg-[#21262d]" />
-                <a href={mapsUrl} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm text-[#c7d1de] transition hover:text-[#58a6ff]">
+                <div className="hidden h-10 w-px bg-[#21262d] sm:block" />
+                <a href={mapsUrl} target="_blank" rel="noreferrer" className="flex basis-full items-center justify-center gap-1.5 text-sm text-[#c7d1de] transition hover:text-[#58a6ff] sm:basis-auto">
                   <MapPin className="h-4 w-4" />{portfolioData.location}
                   </a>
               </motion.div>
 
               {/* CTA buttons */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-8 flex flex-wrap justify-center gap-3">
-                <a href={`mailto:${portfolioData.email}`} className="inline-flex items-center gap-2 rounded-full bg-[#58a6ff] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#58a6ff]/25 transition hover:bg-[#79c0ff] hover:shadow-[#58a6ff]/40">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-7 flex w-full max-w-md flex-wrap justify-center gap-3 sm:mt-8 sm:max-w-none">
+                <a href={`mailto:${portfolioData.email}`} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#58a6ff] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#58a6ff]/25 transition hover:bg-[#79c0ff] hover:shadow-[#58a6ff]/40 sm:w-auto">
                   <Mail className="h-4 w-4" />Get in touch
                 </a>
-                <a href={cvUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-[#f0f6fc]/10 bg-[#f0f6fc]/[0.04] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#f0f6fc]/10">
+                <a href={cvUrl} target="_blank" rel="noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#f0f6fc]/10 bg-[#f0f6fc]/[0.04] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#f0f6fc]/10 sm:w-auto">
                   <Download className="h-4 w-4" />Download CV
                 </a>
               </motion.div>
 
               {/* Social links */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mt-6 flex items-center gap-4 text-[13px] text-[#9bacbf]">
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px] text-[#9bacbf]">
                 {[
                   { icon: Github, href: portfolioData.socials.github, label: 'GitHub' },
                   { icon: Linkedin, href: portfolioData.socials.linkedin, label: 'LinkedIn' },
@@ -612,10 +685,10 @@ export function PortfolioStatic() {
             <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {portfolioData.skills.map((group, i) => (
                 <FadeIn key={group.category} delay={i * 0.05}>
-                <div className="rounded-lg border border-[#21262d] bg-[#010409] p-5 transition hover:border-[#30363d]">
-                  <h3 className="text-sm font-semibold text-[#e6edf3]">{group.category}</h3>
+                <div className="rounded-lg border border-[#2f3a4b] bg-[#0b1220] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-[#58a6ff]/50 hover:shadow-[0_0_24px_rgba(88,166,255,0.10)]">
+                  <h3 className="text-sm font-semibold text-[#f0f6fc]">{group.category}</h3>
                   <div className="mt-3 flex flex-wrap gap-1.5">
-                    {group.skills.map(s => <span key={s} className="rounded-full border border-[#30363d] px-2.5 py-1 text-[11px] text-[#c7d1de]">{s}</span>)}
+                    {group.skills.map(s => <span key={s} className="rounded-full border border-[#3a475c] bg-[#141d2d] px-2.5 py-1 text-[11px] font-medium text-[#f8fbff]">{s}</span>)}
                   </div>
                 </div>
                 </FadeIn>
@@ -630,8 +703,8 @@ export function PortfolioStatic() {
               <div className="divide-y divide-[#21262d]">
                 {portfolioData.technicalSkillsTable.map(row => (
                   <div key={row.category} className="grid gap-1 px-5 py-3 md:grid-cols-[160px_1fr] md:gap-6">
-                    <p className="text-[13px] font-medium text-[#58a6ff]">{row.category}</p>
-                    <p className="text-[13px] text-[#c7d1de]">{row.skills}</p>
+                    <p className="text-[13px] font-semibold text-[#8ec7ff]">{row.category}</p>
+                    <p className="text-[13px] text-[#edf3fb]">{row.skills}</p>
                   </div>
                 ))}
               </div>
