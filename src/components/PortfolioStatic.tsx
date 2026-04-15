@@ -44,72 +44,10 @@ const companyInfo: Record<string, { logo: string; url: string }> = {
 const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Selected Works', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
-];
-
-const heroFloatingTokens = [
-  { text: 'const', top: '9%', left: '8%', rotate: -18, drift: 7, duration: 9.2, delay: 0.3 },
-  { text: 'flutter()', top: '12%', left: '19%', rotate: 14, drift: 9, duration: 8.4, delay: 0.9 },
-  { text: '<Widget />', top: '18%', left: '10%', rotate: 45, drift: 8, duration: 10.1, delay: 0.2 },
-  { text: 'FutureBuilder', top: '26%', left: '7%', rotate: 90, drift: 10, duration: 11.3, delay: 0.6 },
-  { text: 'BlocProvider', top: '34%', left: '14%', rotate: -45, drift: 7, duration: 8.8, delay: 0.1 },
-  { text: 'PlatformChannel', top: '43%', left: '6%', rotate: 270, drift: 10, duration: 10.7, delay: 0.8 },
-  { text: '{ api: true }', top: '58%', left: '11%', rotate: -90, drift: 8, duration: 9.6, delay: 1.1 },
-  { text: 'Firebase', top: '68%', left: '7%', rotate: 22, drift: 9, duration: 11.5, delay: 0.4 },
-  { text: '</>', top: '78%', left: '15%', rotate: 135, drift: 7, duration: 8.9, delay: 0.7 },
-  { text: 'main.dart', top: '13%', left: '84%', rotate: -14, drift: 10, duration: 10.9, delay: 0.5 },
-  { text: 'return MaterialApp(...)', top: '21%', left: '78%', rotate: 6, drift: 8, duration: 9.7, delay: 0.2 },
-  { text: 'State • Bloc • Provider', top: '29%', left: '88%', rotate: 270, drift: 11, duration: 11.8, delay: 1.0 },
-  { text: 'Dio + Http', top: '38%', left: '80%', rotate: -26, drift: 9, duration: 8.6, delay: 0.4 },
-  { text: 'Crashlytics', top: '47%', left: '90%', rotate: 45, drift: 7, duration: 9.1, delay: 0.9 },
-  { text: 'CI/CD', top: '59%', left: '83%', rotate: 90, drift: 10, duration: 10.2, delay: 0.3 },
-  { text: 'Mini App', top: '67%', left: '91%', rotate: -45, drift: 8, duration: 9.9, delay: 0.6 },
-  { text: 'Super App', top: '76%', left: '82%', rotate: 270, drift: 11, duration: 11.1, delay: 1.2 },
-  { text: 'NFC • eKYC', top: '84%', left: '92%', rotate: -20, drift: 7, duration: 8.7, delay: 0.8 },
-];
-
-const heroPlatformBadges: Array<{
-  top: string;
-  left: string;
-  rotate: number;
-  scale: number;
-  drift: number;
-  duration: number;
-  delay: number;
-  label: string;
-  icon: 'flutter' | 'android' | 'ios';
-}> = [
-  { top: '16%', left: '30%', rotate: -22, scale: 1, drift: 8, duration: 12, delay: 0.2, label: 'Flutter', icon: 'flutter' },
-  { top: '39%', left: '22%', rotate: 45, scale: 0.9, drift: 10, duration: 13.5, delay: 0.9, label: 'Android', icon: 'android' },
-  { top: '63%', left: '27%', rotate: 90, scale: 0.95, drift: 9, duration: 11.8, delay: 0.3, label: 'iOS', icon: 'ios' },
-  { top: '26%', left: '70%', rotate: 270, scale: 1, drift: 11, duration: 14.2, delay: 0.7, label: 'Android', icon: 'android' },
-  { top: '49%', left: '76%', rotate: -45, scale: 0.92, drift: 8, duration: 12.7, delay: 0.1, label: 'Flutter', icon: 'flutter' },
-  { top: '72%', left: '68%', rotate: 135, scale: 0.88, drift: 10, duration: 13.8, delay: 1.1, label: 'iOS', icon: 'ios' },
-];
-
-const mobileHeroFloatingTokens = [
-  { text: 'flutter()', top: '10%', left: '8%', rotate: -12, drift: 5, duration: 8.5, delay: 0.4 },
-  { text: '<Widget />', top: '24%', left: '74%', rotate: 9, drift: 4, duration: 9.1, delay: 0.2 },
-  { text: 'BlocProvider', top: '60%', left: '6%', rotate: -8, drift: 5, duration: 8.9, delay: 0.7 },
-  { text: 'Dio + Http', top: '76%', left: '72%', rotate: 11, drift: 4, duration: 9.4, delay: 0.5 },
-];
-
-const mobileHeroPlatformBadges: Array<{
-  top: string;
-  left: string;
-  rotate: number;
-  scale: number;
-  drift: number;
-  duration: number;
-  delay: number;
-  label: string;
-  icon: 'flutter' | 'android' | 'ios';
-}> = [
-  { top: '16%', left: '70%', rotate: -10, scale: 0.8, drift: 5, duration: 10.8, delay: 0.2, label: 'Flutter', icon: 'flutter' },
-  { top: '66%', left: '76%', rotate: 8, scale: 0.8, drift: 5, duration: 11.4, delay: 0.5, label: 'iOS', icon: 'ios' },
 ];
 
 /* ── Shared ── */
@@ -143,41 +81,88 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4" onClick={onClose}>
-      <motion.div className="absolute inset-0 bg-black/70 backdrop-blur-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} />
-      <motion.div className="relative max-h-[90vh] w-full max-w-2xl overflow-hidden rounded-xl border border-[#30363d] bg-[#010409] shadow-2xl" onClick={e => e.stopPropagation()} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.2 }}>
-        <button onClick={onClose} className="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center rounded-md bg-[#21262d] text-[#c7d1de] transition hover:text-white"><X className="h-4 w-4" /></button>
+      <motion.div className="absolute inset-0 bg-black/75 backdrop-blur-md" initial={{ opacity: 0 }} animate={{ opacity: 1 }} />
+      <motion.div className="relative w-full max-w-[min(92vw,1120px)] overflow-hidden rounded-[28px] border border-white/10 bg-[#08111d] shadow-[0_40px_120px_rgba(0,0,0,0.55)]" onClick={e => e.stopPropagation()} initial={{ opacity: 0, y: 24, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}>
+        <button onClick={onClose} className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[#c7d1de] transition hover:bg-white/10 hover:text-white"><X className="h-4 w-4" /></button>
         <div className="max-h-[90vh] overflow-y-auto">
-          <div className="relative flex h-44 items-end p-6" style={{ background: `linear-gradient(135deg, ${v?.bg ?? '#58a6ff'}, ${v?.bgLight ?? '#79c0ff'})` }}>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#010409]/60 to-transparent" />
-            <div className="relative flex items-end gap-4">
-              {v?.logo ? <img src={v.logo} alt="" className="h-16 w-16 rounded-xl shadow-lg ring-1 ring-white/20" /> : <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-white/15 backdrop-blur"><Icon className="h-8 w-8 text-white" /></div>}
-              <div><p className="font-display text-xl font-bold text-white">{project.name}</p><p className="text-sm text-white/72">{project.company}</p></div>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-4 border-b border-[#21262d] px-6 py-3 text-xs text-[#c7d1de]">
-            <span className="flex items-center gap-1"><CalendarDays className="h-3.5 w-3.5" />{project.time}</span>
-            <span className="flex items-center gap-1"><Briefcase className="h-3.5 w-3.5" />{project.role}</span>
-            <span className="flex items-center gap-1"><Users className="h-3.5 w-3.5" />{project.teamSize}</span>
-            <span className="flex items-center gap-1"><Code2 className="h-3.5 w-3.5" />{project.platform.join(', ')}</span>
-          </div>
-          <div className="space-y-5 p-6">
-            <p className="text-sm leading-relaxed text-[#c7d1de]">{project.description}</p>
-            <div className="rounded-lg border border-[#58a6ff]/20 bg-[#58a6ff]/5 p-4">
-              <p className="flex gap-2 text-sm text-[#58a6ff]"><Sparkles className="mt-0.5 h-4 w-4 shrink-0" />{project.highlight}</p>
-            </div>
-            <div>
-              <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#9bacbf]">Responsibilities</p>
-              <ul className="space-y-2">{project.responsibilities.map(r => <li key={r} className="flex gap-2.5 text-sm text-[#c7d1de]"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#58a6ff]/40" />{r}</li>)}</ul>
-            </div>
-            <div className="flex flex-wrap gap-2">{project.technologies.map(t => <Tag key={t}>{t}</Tag>)}{project.languages.map(l => <Tag key={l}>{l}</Tag>)}</div>
-            {project.modules && project.modules.length > 0 && <div><p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-[#9bacbf]">Modules</p><div className="flex flex-wrap gap-2">{project.modules.map(m => <Tag key={m}>{m}</Tag>)}</div></div>}
-            {project.links && (
-              <div className="flex flex-wrap gap-2 border-t border-[#21262d] pt-4">
-                {project.links.web && <a href={project.links.web} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-[#30363d] bg-[#21262d] px-3 py-1.5 text-xs text-[#c9d1d9] transition hover:border-[#58a6ff]/40 hover:text-[#58a6ff]"><Globe className="h-3.5 w-3.5" />Web<ArrowUpRight className="h-3 w-3" /></a>}
-                {project.links.googlePlay && <a href={project.links.googlePlay} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-[#30363d] bg-[#21262d] px-3 py-1.5 text-xs text-[#c9d1d9] transition hover:border-[#58a6ff]/40 hover:text-[#58a6ff]">Google Play<ArrowUpRight className="h-3 w-3" /></a>}
-                {project.links.appStore && <a href={project.links.appStore} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-md border border-[#30363d] bg-[#21262d] px-3 py-1.5 text-xs text-[#c9d1d9] transition hover:border-[#58a6ff]/40 hover:text-[#58a6ff]">App Store<ArrowUpRight className="h-3 w-3" /></a>}
+          <div className="relative overflow-hidden border-b border-white/10 p-6 md:p-8" style={{ background: `linear-gradient(135deg, ${v?.bg ?? '#58a6ff'} 0%, ${v?.bgLight ?? '#79c0ff'} 100%)` }}>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_40%),linear-gradient(180deg,_rgba(1,4,9,0.0),_rgba(1,4,9,0.35))]" />
+            <div className="relative flex items-start justify-between gap-6">
+              <div className="flex items-center gap-4">
+                {v?.logo ? (
+                  <img src={v.logo} alt="" className="h-16 w-16 rounded-2xl border border-white/20 bg-white/10 object-contain shadow-[0_16px_40px_rgba(0,0,0,0.25)]" />
+                ) : (
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/20 bg-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.25)]">
+                    <Icon className="h-8 w-8 text-white" />
+                  </div>
+                )}
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80">Selected work</p>
+                  <h3 className="mt-2 font-display text-3xl font-semibold text-white md:text-4xl">{project.name}</h3>
+                  <p className="mt-1 text-sm text-white/80">{project.company}</p>
+                </div>
               </div>
-            )}
+              <div className="hidden rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-medium text-white/90 md:inline-flex">{project.role}</div>
+            </div>
+          </div>
+
+          <div className="grid gap-0 md:grid-cols-[1.05fr_0.95fr]">
+            <div className="border-b border-white/10 p-6 md:border-b-0 md:border-r md:p-8">
+              <div className="flex flex-wrap gap-2">
+                <Tag>{project.time}</Tag>
+                <Tag>{project.teamSize}</Tag>
+                {project.platform.map((item) => <Tag key={item}>{item}</Tag>)}
+              </div>
+
+              <p className="mt-5 text-sm leading-7 text-[#c7d1de] md:text-base">{project.description}</p>
+
+              <div className="mt-6 rounded-[22px] border border-white/10 bg-white/[0.04] p-4 md:p-5">
+                <p className="flex gap-2 text-sm leading-7 text-white">
+                  <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[#79c0ff]" />{project.highlight}
+                </p>
+              </div>
+
+              <div className="mt-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Responsibilities</p>
+                <ul className="mt-3 space-y-2.5">
+                  {project.responsibilities.map((r) => (
+                    <li key={r} className="flex gap-2.5 text-sm leading-7 text-[#c7d1de]"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#58a6ff]/60" />{r}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="p-6 md:p-8">
+              <div className="space-y-4">
+                <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 md:p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Technologies</p>
+                  <div className="mt-3 flex flex-wrap gap-2">{project.technologies.map((t) => <Tag key={t}>{t}</Tag>)}</div>
+                </div>
+
+                <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 md:p-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Languages</p>
+                  <div className="mt-3 flex flex-wrap gap-2">{project.languages.map((l) => <Tag key={l}>{l}</Tag>)}</div>
+                </div>
+
+                {project.modules && project.modules.length > 0 && (
+                  <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 md:p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Modules</p>
+                    <div className="mt-3 flex flex-wrap gap-2">{project.modules.map((m) => <Tag key={m}>{m}</Tag>)}</div>
+                  </div>
+                )}
+
+                {project.links && (
+                  <div className="rounded-[22px] border border-white/10 bg-white/[0.04] p-4 md:p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Links</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {project.links.web && <a href={project.links.web} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-white transition hover:bg-white/10">Web<ArrowUpRight className="h-3 w-3" /></a>}
+                      {project.links.googlePlay && <a href={project.links.googlePlay} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-white transition hover:bg-white/10">Google Play<ArrowUpRight className="h-3 w-3" /></a>}
+                      {project.links.appStore && <a href={project.links.appStore} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-white transition hover:bg-white/10">App Store<ArrowUpRight className="h-3 w-3" /></a>}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -190,6 +175,7 @@ export function PortfolioStatic() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cursor, setCursor] = useState({ x: 0, y: 0 });
+  const [cursorHover, setCursorHover] = useState(false);
 
   // Experience is calculated from 05/2022 and rounded up to 0.5-year steps.
   const experienceStartDate = new Date(2022, 4, 1);
@@ -208,20 +194,39 @@ export function PortfolioStatic() {
   useEffect(() => {
     const onMove = (event: MouseEvent) => {
       setCursor({ x: event.clientX, y: event.clientY });
+      setCursorHover(Boolean((event.target as HTMLElement | null)?.closest('a, button')));
     };
 
+    const onLeave = () => setCursorHover(false);
+
     window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
+    window.addEventListener('mouseleave', onLeave);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseleave', onLeave);
+    };
   }, []);
 
   return (
     <div className="min-h-screen bg-[#010409] text-[#e6edf3]">
+      <div className="pointer-events-none fixed inset-0 z-[-1] bg-[radial-gradient(circle_at_top,_rgba(88,166,255,0.08),_transparent_42%),radial-gradient(circle_at_right,_rgba(210,168,255,0.05),_transparent_30%),linear-gradient(180deg,_rgba(255,255,255,0.02)_0%,_transparent_24%,_transparent_100%)]" />
       {/* Ambient */}
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/2 top-0 h-[600px] w-[900px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#58a6ff]/[0.04] blur-[120px]" />
         <div className="absolute -right-40 top-1/2 h-[400px] w-[400px] rounded-full bg-[#d2a8ff]/[0.03] blur-[100px]" />
         <div className="absolute -left-40 bottom-1/4 h-[350px] w-[350px] rounded-full bg-[#ff7b72]/[0.02] blur-[100px]" />
       </div>
+
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[90] hidden h-4 w-4 rounded-full bg-white md:block"
+        animate={{ x: cursor.x - 8, y: cursor.y - 8, scale: cursorHover ? 1.4 : 1 }}
+        transition={{ type: 'tween', duration: 0.08, ease: 'linear' }}
+      />
+      <motion.div
+        className="pointer-events-none fixed left-0 top-0 z-[89] hidden h-12 w-12 rounded-full border border-white/35 md:block"
+        animate={{ x: cursor.x - 24, y: cursor.y - 24, scale: cursorHover ? 1.25 : 1 }}
+        transition={{ type: 'tween', duration: 0.18, ease: 'easeOut' }}
+      />
 
       <motion.div
         className="pointer-events-none fixed left-0 top-0 z-0 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(88,166,255,0.25)_0%,rgba(88,166,255,0.09)_35%,transparent_72%)] opacity-55 blur-2xl mix-blend-screen md:block"
@@ -252,148 +257,93 @@ export function PortfolioStatic() {
       <main id="top">
         {/* ── Hero ── */}
         <section className="relative isolate overflow-hidden">
-          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-            <div className="md:hidden">
-              {mobileHeroFloatingTokens.map((item) => (
-                <motion.div
-                  key={`mobile-${item.text}-${item.top}-${item.left}`}
-                  className="absolute rounded-full border border-white/8 bg-white/4 px-2.5 py-1 font-mono text-[10px] text-white/12 backdrop-blur-[1px]"
-                  style={{ top: item.top, left: item.left, transform: `rotate(${item.rotate}deg)` }}
-                  animate={{ y: [0, -item.drift, 0, item.drift, 0], x: [0, item.drift * 0.3, 0, -item.drift * 0.3, 0] }}
-                  transition={{ duration: item.duration, delay: item.delay, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  {item.text}
+          <div className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_top_left,_rgba(88,166,255,0.10),_transparent_34%),radial-gradient(circle_at_75%_20%,_rgba(210,168,255,0.08),_transparent_28%),radial-gradient(circle_at_bottom_right,_rgba(255,123,114,0.05),_transparent_22%)]" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-white/10" />
+          <motion.div className="relative z-10 mx-auto max-w-[1400px] px-6 py-16 md:py-24 lg:py-28" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
+            <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+              <div className="max-w-4xl">
+                <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }} className="text-[11px] font-semibold uppercase tracking-[0.45em] text-[#8a96a8]">
+                  Interactive portfolio / motion-heavy UI
+                </motion.p>
+
+                <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12 }} className="mt-6 max-w-5xl font-display text-[clamp(3.6rem,11vw,9rem)] font-semibold leading-[0.88] tracking-[-0.09em] text-white">
+                  Hi, I&apos;m{' '}
+                  <span className="gh-gradient-text">Tran Dinh Nam</span>
+                </motion.h1>
+
+                <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.22 }} className="mt-6 max-w-2xl text-lg leading-8 text-[#c7d1de] md:text-xl">
+                  {dynamicTagline}
+                </motion.p>
+
+                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28 }} className="mt-8 flex flex-wrap gap-3">
+                  <a href={`mailto:${portfolioData.email}`} className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#010409] transition hover:-translate-y-0.5 hover:bg-[#f1f5f9]">
+                    <Mail className="h-4 w-4" />Get in touch
+                  </a>
+                  <a href={cvUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-white/10">
+                    <Download className="h-4 w-4" />Download CV
+                  </a>
+                  <a href={mapsUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm font-medium text-[#c7d1de] transition hover:-translate-y-0.5 hover:border-white/20 hover:text-white">
+                    <MapPin className="h-4 w-4" />{portfolioData.location}
+                  </a>
                 </motion.div>
-              ))}
 
-              {mobileHeroPlatformBadges.map((badge) => (
-                <motion.div
-                  key={`mobile-${badge.label}-${badge.top}-${badge.left}`}
-                  className="absolute flex items-center gap-1.5 rounded-xl border border-[#58a6ff]/16 bg-[#08111d]/45 px-2.5 py-1.5 shadow-[0_0_20px_rgba(88,166,255,0.08)] backdrop-blur"
-                  style={{ top: badge.top, left: badge.left, transform: `rotate(${badge.rotate}deg) scale(${badge.scale})` }}
-                  animate={{ y: [0, -badge.drift, 0, badge.drift, 0], x: [0, badge.drift * 0.25, 0, -badge.drift * 0.25, 0] }}
-                  transition={{ duration: badge.duration, delay: badge.delay, repeat: Infinity, ease: 'easeInOut' }}
-                >
-                  {badge.icon === 'flutter' ? (
-                    <FlutterMark className="h-4 w-4 drop-shadow-[0_0_8px_rgba(71,197,251,0.28)]" />
-                  ) : badge.icon === 'android' ? (
-                    <Smartphone className="h-3.5 w-3.5 text-[#79c0ff]/90" />
-                  ) : (
-                    <Apple className="h-3.5 w-3.5 text-[#79c0ff]/90" />
-                  )}
-                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#8cbcff]/85">{badge.label}</span>
+                <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.34 }} className="mt-10 flex flex-wrap gap-3 text-sm text-[#9bacbf]">
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Flutter</span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Android</span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">iOS</span>
+                  <span className="rounded-full border border-white/10 bg-white/5 px-4 py-2">Super App</span>
                 </motion.div>
-              ))}
-            </div>
 
-            <div className="hidden md:block">
-            {heroFloatingTokens.map((item) => (
-              <motion.div
-                key={`${item.text}-${item.top}-${item.left}`}
-                className="absolute rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] text-white/16 backdrop-blur-[1px]"
-                style={{ top: item.top, left: item.left, transform: `rotate(${item.rotate}deg)` }}
-                animate={{ y: [0, -item.drift, 0, item.drift, 0], x: [0, item.drift * 0.35, 0, -item.drift * 0.35, 0] }}
-                transition={{ duration: item.duration, delay: item.delay, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                {item.text}
-              </motion.div>
-            ))}
-
-            {heroPlatformBadges.map((badge) => (
-              <motion.div
-                key={`${badge.label}-${badge.top}-${badge.left}-${badge.rotate}`}
-                className="absolute flex items-center gap-2 rounded-xl border border-[#58a6ff]/20 bg-[#08111d]/65 px-3 py-2 shadow-[0_0_32px_rgba(88,166,255,0.10)] backdrop-blur"
-                style={{ top: badge.top, left: badge.left, transform: `rotate(${badge.rotate}deg) scale(${badge.scale})` }}
-                animate={{ y: [0, -badge.drift, 0, badge.drift, 0], x: [0, badge.drift * 0.3, 0, -badge.drift * 0.3, 0] }}
-                transition={{ duration: badge.duration, delay: badge.delay, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                {badge.icon === 'flutter' ? (
-                  <FlutterMark className="h-5 w-5 drop-shadow-[0_0_10px_rgba(71,197,251,0.35)]" />
-                ) : badge.icon === 'android' ? (
-                  <Smartphone className="h-4 w-4 text-[#79c0ff]" />
-                ) : (
-                  <Apple className="h-4 w-4 text-[#79c0ff]" />
-                )}
-                <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8cbcff]">{badge.label}</span>
-              </motion.div>
-            ))}
-            </div>
-          </div>
-          {/* Top gradient line */}
-          <div className="mx-auto h-px max-w-4xl gh-gradient-line" />
-
-          <motion.div className="relative z-10 mx-auto max-w-[1280px] px-6 py-16 md:py-32" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
-            <div className="flex flex-col items-center text-center">
-              {/* Avatar - large & prominent */}
-              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1, duration: 0.5 }} className="relative">
-                <div className="relative h-32 w-32 sm:h-40 sm:w-40 md:h-52 md:w-52 lg:h-60 lg:w-60">
-                  {/* Glow ring */}
-                  <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72] opacity-20 blur-xl" />
-                  <div className="relative h-full w-full overflow-hidden rounded-full p-[3px] bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72]">
-                    <img src={img('/images/avatar.jpeg')} alt={portfolioData.name} className="h-full w-full rounded-full object-cover" />
+                <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm">
+                    <p className="font-display text-3xl font-bold gh-gradient-text">{yearsStatText}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[#9bacbf]">Years</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm">
+                    <p className="font-display text-3xl font-bold gh-gradient-text">{portfolioData.stats.projectsCompleted}+</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[#9bacbf]">Projects</p>
+                  </div>
+                  <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm sm:col-span-2 lg:col-span-1">
+                    <p className="font-display text-3xl font-bold text-white">Open</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.22em] text-[#9bacbf]">For work</p>
                   </div>
                 </div>
-                {/* Available badge - prominent */}
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="absolute -bottom-3 left-1/2 -translate-x-1/2 sm:-bottom-4">
-                  <span className="flex w-max items-center gap-2 whitespace-nowrap rounded-full border border-[#58a6ff]/50 bg-[#010409]/95 px-3.5 py-1.5 text-xs font-bold tracking-wide text-[#79c0ff] shadow-[0_0_25px_rgba(88,166,255,0.25),0_0_50px_rgba(88,166,255,0.1)] ring-1 ring-[#58a6ff]/30 backdrop-blur-sm sm:gap-2.5 sm:px-5 sm:py-2.5 sm:text-sm">
-                    <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#58a6ff] opacity-60" />
-                      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-gradient-to-r from-[#58a6ff] to-[#79c0ff] shadow-[0_0_6px_rgba(88,166,255,0.6)] sm:h-3 sm:w-3" />
-                    </span>
-                    Available for work
-                  </span>
-                </motion.div>
-              </motion.div>
+              </div>
 
-              {/* Greeting */}
-              <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }} className="mt-10 font-display text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl md:mt-12 md:text-6xl lg:text-7xl">
-                Hey, I'm{' '}<span className="gh-gradient-text">{portfolioData.name.split(' ').pop()}</span>
-                <span className="ml-2 inline-block animate-[wave_1.5s_ease-in-out_infinite] origin-[70%_70%]">👋</span>
-              </motion.h1>
+              <motion.div initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ delay: 0.16, duration: 0.6 }} className="relative">
+                <div className="rounded-[36px] border border-white/10 bg-white/[0.04] p-5 shadow-[0_30px_120px_rgba(0,0,0,0.45)] backdrop-blur-xl md:p-6">
+                  <div className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[#08111d] p-6 md:p-7">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(88,166,255,0.14),_transparent_48%),linear-gradient(180deg,_rgba(255,255,255,0.02)_0%,_transparent_100%)]" />
 
-              <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="mt-5 max-w-2xl text-base leading-relaxed text-[#c7d1de] sm:mt-6 sm:text-lg md:text-xl">
-                {dynamicTagline}
-              </motion.p>
+                    <div className="relative flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8a96a8]">Now</p>
+                        <h2 className="mt-2 font-display text-3xl font-semibold tracking-[-0.05em] text-white md:text-4xl">Building mobile systems.</h2>
+                      </div>
+                      <div className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-[#c7d1de]">Flutter / Android / iOS</div>
+                    </div>
 
-              {/* Stats inline */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="mt-7 flex w-full max-w-xl flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:mt-8 sm:gap-8">
-                <div className="text-center">
-                  <p className="font-display text-3xl font-bold gh-gradient-text">{yearsStatText}</p>
-                  <p className="text-xs text-[#9bacbf]">Years</p>
+                    <div className="relative mt-8 flex justify-center">
+                      <div className="relative h-[19rem] w-[19rem] sm:h-[24rem] sm:w-[24rem]">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72] opacity-25 blur-3xl" />
+                        <div className="absolute inset-2 rounded-full border border-white/10" />
+                        <div className="relative h-full w-full overflow-hidden rounded-full p-[3px] bg-gradient-to-r from-[#58a6ff] via-[#d2a8ff] to-[#ff7b72]">
+                          <img src={img('/images/avatar.jpeg')} alt={portfolioData.name} className="h-full w-full rounded-full object-cover" />
+                        </div>
+                      </div>
+
+                      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.36 }} className="absolute -bottom-1 left-1/2 -translate-x-1/2">
+                        <span className="flex items-center gap-2 rounded-full border border-[#58a6ff]/30 bg-[#010409]/90 px-4 py-2 text-sm font-semibold text-white shadow-[0_0_28px_rgba(88,166,255,0.18)]">
+                          <span className="relative flex h-2.5 w-2.5">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#58a6ff] opacity-60" />
+                            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#58a6ff]" />
+                          </span>
+                          Available for work
+                        </span>
+                      </motion.div>
+                    </div>
+                  </div>
                 </div>
-                <div className="hidden h-10 w-px bg-[#21262d] sm:block" />
-                <div className="text-center">
-                  <p className="font-display text-3xl font-bold gh-gradient-text">{portfolioData.stats.projectsCompleted}+</p>
-                  <p className="text-xs text-[#9bacbf]">Projects</p>
-                </div>
-                <div className="hidden h-10 w-px bg-[#21262d] sm:block" />
-                <a href={mapsUrl} target="_blank" rel="noreferrer" className="flex basis-full items-center justify-center gap-1.5 text-sm text-[#c7d1de] transition hover:text-[#58a6ff] sm:basis-auto">
-                  <MapPin className="h-4 w-4" />{portfolioData.location}
-                  </a>
-              </motion.div>
-
-              {/* CTA buttons */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="mt-7 flex w-full max-w-md flex-wrap justify-center gap-3 sm:mt-8 sm:max-w-none">
-                <a href={`mailto:${portfolioData.email}`} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#58a6ff] px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-[#58a6ff]/25 transition hover:bg-[#79c0ff] hover:shadow-[#58a6ff]/40 sm:w-auto">
-                  <Mail className="h-4 w-4" />Get in touch
-                </a>
-                <a href={cvUrl} target="_blank" rel="noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#f0f6fc]/10 bg-[#f0f6fc]/[0.04] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#f0f6fc]/10 sm:w-auto">
-                  <Download className="h-4 w-4" />Download CV
-                </a>
-              </motion.div>
-
-              {/* Social links */}
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[13px] text-[#9bacbf]">
-                {[
-                  { icon: Github, href: portfolioData.socials.github, label: 'GitHub' },
-                  { icon: Linkedin, href: portfolioData.socials.linkedin, label: 'LinkedIn' },
-                  { icon: Globe, href: portfolioData.socials.pubDev, label: 'Pub.dev' },
-                ].map((s, i) => (
-                  <span key={s.label} className="contents">
-                    {i > 0 && <span className="h-3 w-px bg-[#21262d]" />}
-                    <a href={s.href} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 transition hover:text-[#58a6ff]"><s.icon className="h-3.5 w-3.5" />{s.label}</a>
-                  </span>
-                ))}
               </motion.div>
             </div>
           </motion.div>
@@ -463,60 +413,73 @@ export function PortfolioStatic() {
                 const [periodStart, periodEnd = 'Present'] = item.period.split(' - ');
 
                 const card = (
-                  <div className="overflow-hidden rounded-2xl bg-[#0d1117] ring-1 ring-[#364153] transition-all duration-300 hover:ring-[#58a6ff]/45 hover:shadow-[0_0_30px_rgba(88,166,255,0.10)]">
-                    <a
-                      href={company?.url ?? '#'}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group/company relative flex items-center gap-5 px-6 py-6 transition-all duration-300 hover:bg-[#161b22]/70"
-                    >
-                      <div className="absolute left-6 top-1/2 h-20 w-20 -translate-y-1/2 rounded-full bg-[#58a6ff]/[0.08] blur-2xl transition-all duration-300 group-hover/company:bg-[#58a6ff]/[0.16]" />
+                  <a
+                    href={company?.url ?? '#'}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/company block overflow-hidden rounded-[28px] border border-white/10 bg-[#0b1220]/85 shadow-[0_0_0_rgba(0,0,0,0)] transition-all duration-300 hover:-translate-y-1 hover:border-[#58a6ff]/35 hover:shadow-[0_24px_60px_rgba(0,0,0,0.35),0_0_30px_rgba(88,166,255,0.12)]"
+                  >
+                    <div className="relative overflow-hidden p-5 md:p-6">
+                      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(88,166,255,0.10),_transparent_36%),radial-gradient(circle_at_bottom_left,_rgba(210,168,255,0.08),_transparent_30%)] opacity-0 transition-opacity duration-300 group-hover/company:opacity-100" />
 
-                      {company?.logo ? (
-                        <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white p-2.5 shadow-[0_0_20px_rgba(88,166,255,0.15)] ring-1 ring-white/30 transition-all duration-300 group-hover/company:scale-110 group-hover/company:shadow-[0_0_30px_rgba(88,166,255,0.3)] group-hover/company:ring-[#58a6ff]/50">
-                          <img src={company.logo} alt="" className="h-full w-full object-contain" />
-                        </div>
-                      ) : (
-                        <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#58a6ff] to-[#d2a8ff] shadow-[0_0_20px_rgba(88,166,255,0.2)] transition-all duration-300 group-hover/company:scale-110 group-hover/company:shadow-[0_0_30px_rgba(88,166,255,0.35)]">
-                          <Briefcase className="h-6 w-6 text-white" />
-                        </div>
-                      )}
+                      <div className="relative grid gap-5 lg:grid-cols-[1fr_220px] lg:items-start lg:gap-8">
+                        <div className="flex items-start gap-4 md:gap-5">
+                          {company?.logo ? (
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-2.5 shadow-[0_0_20px_rgba(88,166,255,0.12)] transition duration-300 group-hover/company:scale-105 group-hover/company:border-[#58a6ff]/30 group-hover/company:shadow-[0_0_30px_rgba(88,166,255,0.22)]">
+                              <img src={company.logo} alt="" className="h-full w-full object-contain" />
+                            </div>
+                          ) : (
+                            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-[#58a6ff] to-[#d2a8ff] shadow-[0_0_20px_rgba(88,166,255,0.18)] transition duration-300 group-hover/company:scale-105">
+                              <Briefcase className="h-6 w-6 text-white" />
+                            </div>
+                          )}
 
-                      <div className="relative min-w-0 flex-1">
-                        <p className="font-display text-xl font-bold text-white transition-colors group-hover/company:text-[#79c0ff]">{item.company}</p>
-                        <p className="mt-1 text-sm font-medium text-[#d8e2f0]">{item.role}</p>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="font-display text-2xl font-semibold tracking-[-0.04em] text-white transition-colors group-hover/company:text-[#79c0ff] md:text-[2rem]">{item.company}</p>
+                              {current && (
+                                <span className="inline-flex items-center gap-1.5 rounded-full border border-[#58a6ff]/30 bg-[#58a6ff]/12 px-3 py-1 text-[11px] font-semibold text-[#79c0ff]">
+                                  <span className="h-2 w-2 animate-pulse rounded-full bg-[#58a6ff]" />NOW
+                                </span>
+                              )}
+                            </div>
+                            <p className="mt-1 text-sm font-medium uppercase tracking-[0.22em] text-[#8a96a8]">{item.role}</p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-start justify-between gap-4 lg:justify-end lg:text-right">
+                          <div>
+                            <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Timeline</p>
+                            <p className="mt-2 font-display text-xl font-semibold text-white">{item.period}</p>
+                          </div>
+                          <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-[#718096] transition-all duration-300 group-hover/company:-translate-y-0.5 group-hover/company:translate-x-0.5 group-hover/company:text-[#58a6ff]" />
+                        </div>
                       </div>
 
-                      <div className="flex items-center gap-3">
-                        <ArrowUpRight className="h-4 w-4 text-[#718096] transition-all duration-300 group-hover/company:-translate-y-0.5 group-hover/company:translate-x-0.5 group-hover/company:text-[#58a6ff]" />
-                        {current && (
-                          <span className="relative flex items-center gap-1.5 rounded-full border border-[#58a6ff]/30 bg-[#58a6ff]/15 px-3 py-1.5 text-[11px] font-bold text-[#79c0ff] shadow-[0_0_12px_rgba(88,166,255,0.15)]">
-                            <span className="h-2 w-2 animate-pulse rounded-full bg-[#58a6ff]" />NOW
-                          </span>
-                        )}
-                      </div>
-                    </a>
-
-                    <div className="mx-6 h-px gh-gradient-line opacity-25" />
-
-                    <div className="px-6 py-5">
-                      <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#9fd4ff]">Responsibilities</p>
-                      <div className="space-y-2.5">
-                        {item.responsibilities.map((r) => (
-                          <p key={r} className="flex gap-2.5 text-[14px] leading-relaxed text-[#d8e2f0]">
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#58a6ff]/50" />{r}
-                          </p>
-                        ))}
-                      </div>
-
-                      {item.achievements.map((a) => (
-                        <div key={a} className="mt-4 flex gap-2.5 rounded-lg border border-[#d29922]/25 bg-gradient-to-r from-[#d29922]/12 to-[#d29922]/6 px-4 py-3">
-                          <Award className="mt-0.5 h-4 w-4 shrink-0 text-[#f0b84a]" />
-                          <p className="text-[13px] font-semibold text-[#f3c76b]">{a}</p>
+                      <div className="relative mt-6 grid gap-5 border-t border-white/10 pt-5 lg:grid-cols-[1fr_0.85fr] lg:gap-8">
+                        <div>
+                          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Responsibilities</p>
+                          <div className="space-y-2.5">
+                            {item.responsibilities.map((r) => (
+                              <p key={r} className="flex gap-2.5 text-[14px] leading-relaxed text-[#d8e2f0]">
+                                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#58a6ff]/55" />{r}
+                              </p>
+                            ))}
+                          </div>
                         </div>
-                      ))}
+
+                        <div className="space-y-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Highlight</p>
+                          {item.achievements.map((a) => (
+                            <div key={a} className="flex gap-2.5 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-3">
+                              <Award className="mt-0.5 h-4 w-4 shrink-0 text-[#58a6ff]" />
+                              <p className="text-[13px] leading-6 text-[#e6edf3]">{a}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 );
 
                 return (
@@ -556,116 +519,66 @@ export function PortfolioStatic() {
 
         {/* ── Projects ── */}
         <FadeIn>
-        <section id="projects" className="py-20">
-          <div className="mx-auto max-w-[1280px] px-6">
-            <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#58a6ff]">Projects</p>
-              <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">Delivery Timeline<span className="gh-gradient-text">.</span></h2>
+        <section id="projects" className="py-24">
+          <div className="mx-auto max-w-[1400px] px-6">
+            <div className="grid gap-6 lg:grid-cols-[1fr_0.8fr] lg:items-end">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-[#8a96a8]">Selected works</p>
+                <h2 className="mt-4 max-w-3xl font-display text-[clamp(2.75rem,6vw,5.4rem)] font-semibold leading-[0.95] tracking-[-0.06em] text-white">Projects as stories, not cards<span className="text-[#58a6ff]">.</span></h2>
+              </div>
+              <p className="max-w-lg text-sm leading-7 text-[#9bacbf] lg:justify-self-end lg:text-right">
+                Hover or open a row to inspect the stack, role, and impact. The layout is intentionally sparse so the work reads like a curated sequence.
+              </p>
             </div>
 
-            <div className="relative mx-auto mt-14 max-w-5xl">
-              <div className="absolute left-5 top-0 bottom-0 w-px bg-gradient-to-b from-white/50 via-white/20 to-transparent md:left-1/2" />
+            <div className="mt-12 rounded-[28px] border border-white/10 bg-white/[0.03] px-5 backdrop-blur-sm md:px-8">
+              {portfolioData.projects.map((project, index) => {
+                const [start, end] = project.time.split(' - ');
+                const v = projectVisuals[project.id];
+                const tags = project.technologies.slice(0, 3);
 
-              <div className="space-y-12">
-                {portfolioData.projects.map((project, index) => {
-                  const [start, end] = project.time.split(' - ');
-                  const isLeft = index % 2 === 0;
-                  const v = projectVisuals[project.id];
-                  const Icon = v?.icon ?? Code2;
+                return (
+                  <FadeIn key={project.id} className="group border-b border-white/10 last:border-b-0" delay={index * 0.05}>
+                    <button type="button" onClick={() => setSelectedProject(project)} className="grid w-full gap-4 px-0 py-6 text-left transition duration-300 hover:translate-x-1 lg:grid-cols-[88px_minmax(0,1fr)_300px] lg:items-center lg:gap-10 lg:py-8">
+                      <div className="font-display text-2xl font-semibold text-[#8a96a8] md:text-3xl">{String(index + 1).padStart(2, '0')}</div>
 
-                  const projectCard = (
-                    <button type="button" onClick={() => setSelectedProject(project)} className="group/c w-full cursor-pointer text-left transition-transform duration-300 hover:scale-[1.03]">
-                      <div className="relative overflow-hidden rounded-xl bg-[#0d1117] ring-1 ring-[#30363d] transition-all duration-300 group-hover/c:ring-[#58a6ff]/50 group-hover/c:shadow-[0_0_30px_rgba(88,166,255,0.12),0_0_60px_rgba(210,168,255,0.06)]">
-                        {/* Hover overlay */}
-                        <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center opacity-0 transition-all duration-300 group-hover/c:bg-black/60 group-hover/c:backdrop-blur-[2px] group-hover/c:opacity-100">
-                          <span className="flex items-center gap-2 rounded-full bg-[#58a6ff] px-5 py-2.5 text-sm font-bold text-white shadow-xl shadow-[#58a6ff]/30 scale-90 transition-transform duration-300 group-hover/c:scale-100">
-                            <ArrowUpRight className="h-4 w-4" />View details
-                          </span>
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                          <h3 className="font-display text-2xl font-semibold tracking-[-0.04em] text-white md:text-4xl">{project.name}</h3>
+                          <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8a96a8]">{project.company}</span>
                         </div>
-
-                        {/* Banner - taller, more prominent */}
-                        <div className="relative flex h-40 items-end overflow-hidden p-5" style={{ background: `linear-gradient(135deg, ${v?.bg ?? '#58a6ff'} 0%, ${v?.bgLight ?? '#79c0ff'} 100%)` }}>
-                          {/* Shine effect */}
-                          <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: 'radial-gradient(circle at 30% 20%, white 0%, transparent 50%)' }} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-transparent to-transparent" />
-
-                          {/* Logo + name */}
-                          <div className="relative flex w-full items-end gap-4">
-                            {v?.logo ? (
-                              <img src={v.logo} alt="" className="h-14 w-14 rounded-xl bg-white/10 shadow-xl shadow-black/30 ring-2 ring-white/25 backdrop-blur-sm" />
-                            ) : (
-                              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/15 shadow-xl shadow-black/30 ring-2 ring-white/25 backdrop-blur-sm">
-                                <Icon className="h-7 w-7 text-white" />
-                              </div>
-                            )}
-                            <div className="flex-1 pb-0.5">
-                              <p className="font-display text-lg font-bold text-white drop-shadow-md">{project.name}</p>
-                              <p className="text-xs text-white/72">{project.company}</p>
-                            </div>
-                          </div>
-
-                          {/* Platform badges */}
-                          <div className="absolute right-4 top-4 flex gap-1.5">
-                            {project.platform.map(p => (
-                              <span key={p} className="rounded-md bg-black/40 px-2 py-0.5 text-[10px] font-semibold text-white/80 shadow backdrop-blur-md">{p}</span>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Content */}
-                        <div className="p-5">
-                          {/* Role badge */}
-                          <span className="inline-flex items-center gap-1.5 rounded-md bg-[#58a6ff]/10 px-2.5 py-1 text-xs font-semibold text-[#58a6ff]">
+                        <p className="mt-3 max-w-3xl text-sm leading-7 text-[#c7d1de] md:text-base">{project.highlight}</p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-white/90">
                             <Briefcase className="h-3 w-3" />{project.role}
                           </span>
+                          <span className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold text-[#c7d1de]">
+                            <CalendarDays className="h-3 w-3" />{project.time}
+                          </span>
+                        </div>
+                      </div>
 
-                          {/* Highlight */}
-                          <p className="mt-3 text-[13px] leading-relaxed text-[#c9d1d9] line-clamp-2">{project.highlight}</p>
-
-                          {/* Tech tags */}
-                          <div className="mt-4 flex flex-wrap gap-1.5">
-                            {project.technologies.slice(0, 4).map(t => (
-                              <span key={t} className="rounded-full border border-[#30363d] bg-[#161b22] px-2.5 py-1 text-[11px] font-medium text-[#c7d1de]">{t}</span>
-                            ))}
-                            {project.technologies.length > 4 && (
-                              <span className="rounded-full border border-[#30363d] bg-[#161b22] px-2.5 py-1 text-[11px] text-[#9bacbf]">+{project.technologies.length - 4}</span>
-                            )}
-                          </div>
+                      <div className="flex flex-col gap-3 lg:items-end">
+                        <div className="flex gap-1.5">
+                          {tags.map((tag) => (
+                            <span key={tag} className="rounded-full border border-white/10 bg-[#161b22] px-2.5 py-1 text-[11px] font-medium text-[#c7d1de]">{tag}</span>
+                          ))}
+                          {project.technologies.length > tags.length && (
+                            <span className="rounded-full border border-white/10 bg-[#161b22] px-2.5 py-1 text-[11px] text-[#9bacbf]">+{project.technologies.length - tags.length}</span>
+                          )}
                         </div>
 
-                        {/* Bottom gradient accent line */}
-                        <div className="h-[2px] w-full gh-gradient-line opacity-40 transition-opacity duration-300 group-hover/c:opacity-80" />
+                        <div className="flex items-center gap-3 text-[#8a96a8] transition group-hover:text-white">
+                          <span className="text-xs uppercase tracking-[0.28em]">View</span>
+                          <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+                        </div>
+
+                        <div className="h-[2px] w-20 gh-gradient-line opacity-40 transition group-hover:w-28 group-hover:opacity-80" />
                       </div>
                     </button>
-                  );
-
-                  const timeLabel = (align: 'left' | 'right') => (
-                    <div className={`flex pt-5 ${align === 'left' ? 'justify-end' : ''}`}>
-                      <div className={align === 'left' ? 'text-right' : ''}>
-                        <p className="font-display text-xl font-bold gh-gradient-text">{start}</p>
-                        <p className="mt-1 text-sm text-[#9bacbf]">{end}</p>
-                        <div className={`mt-2 h-px w-8 gh-gradient-line ${align === 'left' ? 'ml-auto' : ''}`} />
-                      </div>
-                    </div>
-                  );
-
-                  return (
-                    <FadeIn key={project.id} className="relative" delay={index * 0.06}>
-                      <div className="absolute left-5 top-5 z-10 -translate-x-1/2 md:left-1/2">
-                        <div className={`h-3 w-3 rounded-full border-2 border-[#010409] ${index === 0 ? 'bg-[#58a6ff] shadow-[0_0_8px_rgba(88,166,255,0.4)]' : 'bg-[#30363d]'}`} />
-                      </div>
-                      <div className="pl-14 md:hidden">
-                        <span className="mb-2 inline-flex rounded-full border border-[#58a6ff]/20 bg-[#58a6ff]/10 px-3 py-1 text-xs font-medium text-[#58a6ff]"><CalendarDays className="mr-1.5 h-3 w-3" />{project.time}</span>
-                        {projectCard}
-                      </div>
-                      <div className="hidden md:grid md:grid-cols-2 md:gap-10">
-                        <div>{isLeft ? projectCard : timeLabel('left')}</div>
-                        <div>{isLeft ? timeLabel('right') : projectCard}</div>
-                      </div>
-                    </FadeIn>
-                  );
-                })}
-              </div>
+                  </FadeIn>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -678,33 +591,43 @@ export function PortfolioStatic() {
         <section id="skills" className="py-20">
           <div className="mx-auto max-w-[1280px] px-6">
             <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#58a6ff]">Skills</p>
-              <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">Technical Expertise<span className="gh-gradient-text">.</span></h2>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-[#8a96a8]">Skills</p>
+              <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.06em] text-white">Technical Expertise<span className="text-[#58a6ff]">.</span></h2>
             </div>
 
-            <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 rounded-[28px] border border-white/10 bg-white/[0.03] p-5 md:p-8">
+              <div className="grid gap-0">
               {portfolioData.skills.map((group, i) => (
                 <FadeIn key={group.category} delay={i * 0.05}>
-                <div className="rounded-lg border border-[#2f3a4b] bg-[#0b1220] p-5 transition duration-300 hover:-translate-y-0.5 hover:border-[#58a6ff]/50 hover:shadow-[0_0_24px_rgba(88,166,255,0.10)]">
-                  <h3 className="text-sm font-semibold text-[#f0f6fc]">{group.category}</h3>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {group.skills.map(s => <span key={s} className="rounded-full border border-[#3a475c] bg-[#141d2d] px-2.5 py-1 text-[11px] font-medium text-[#f8fbff]">{s}</span>)}
+                  <div className="grid gap-4 border-b border-white/10 py-6 last:border-b-0 lg:grid-cols-[260px_1fr] lg:items-start lg:gap-8 lg:py-8">
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">{String(i + 1).padStart(2, '0')}</p>
+                      <h3 className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-white">{group.category}</h3>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {group.skills.map(s => <Tag key={s}>{s}</Tag>)}
+                    </div>
                   </div>
-                </div>
                 </FadeIn>
               ))}
+              </div>
             </div>
 
             <FadeIn className="mt-8">
-            <div className="overflow-hidden rounded-lg border border-[#21262d]">
-              <div className="border-b border-[#21262d] bg-[#161b22] px-5 py-3">
-                <h3 className="text-sm font-semibold text-[#e6edf3]">Technical Profile</h3>
+            <div className="rounded-[28px] border border-white/10 bg-[#0b1220]/70 p-5 md:p-8">
+              <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-[#8a96a8]">Technical profile</p>
+                  <h3 className="mt-2 font-display text-2xl font-semibold tracking-[-0.04em] text-white">Stack snapshot</h3>
+                </div>
+                <p className="max-w-xl text-sm leading-7 text-[#9bacbf]">A compact inventory of tools, architecture, and delivery practices I use across product teams.</p>
               </div>
-              <div className="divide-y divide-[#21262d]">
+
+              <div className="mt-6 grid gap-3">
                 {portfolioData.technicalSkillsTable.map(row => (
-                  <div key={row.category} className="grid gap-1 px-5 py-3 md:grid-cols-[160px_1fr] md:gap-6">
-                    <p className="text-[13px] font-semibold text-[#8ec7ff]">{row.category}</p>
-                    <p className="text-[13px] text-[#edf3fb]">{row.skills}</p>
+                  <div key={row.category} className="grid gap-3 rounded-[22px] border border-white/10 bg-white/[0.03] px-4 py-4 lg:grid-cols-[180px_1fr] lg:gap-6 lg:px-5">
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#8a96a8]">{row.category}</p>
+                    <p className="text-sm leading-7 text-[#e6edf3]">{row.skills}</p>
                   </div>
                 ))}
               </div>
@@ -721,43 +644,43 @@ export function PortfolioStatic() {
         <section id="education" className="py-20">
           <div className="mx-auto max-w-[1280px] px-6">
             <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#58a6ff]">Education</p>
-              <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">Training & Recognition<span className="gh-gradient-text">.</span></h2>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-[#8a96a8]">Education</p>
+              <h2 className="mt-4 font-display text-[clamp(2.4rem,5vw,4.5rem)] font-semibold leading-[0.95] tracking-[-0.06em] text-white">Training & Recognition<span className="text-[#58a6ff]">.</span></h2>
             </div>
-            <div className="mt-14 grid gap-4 md:grid-cols-2">
+            <div className="mt-12 grid gap-4 md:grid-cols-2">
               {portfolioData.education.map(entry => (
                 <FadeIn key={entry.institution}>
-                <div className="rounded-lg border border-[#21262d] bg-[#010409] p-6">
-                  <div className="flex items-center gap-3">
+                <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-sm">
+                  <div className="flex items-center gap-4">
                     {entry.institution.toLowerCase().includes('aptech') ? (
                       <img
                         src={aptechLogoUrl}
                         alt="Aptech logo"
-                        className="h-11 w-auto max-w-[180px] object-contain"
+                        className="h-11 w-auto max-w-[180px] object-contain opacity-95"
                         onError={(e) => {
                           e.currentTarget.style.display = 'none';
                         }}
                       />
                     ) : (
-                      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#58a6ff]"><GraduationCap className="h-5 w-5 text-white" /></div>
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"><GraduationCap className="h-5 w-5 text-white" /></div>
                     )}
-                    <div><h3 className="font-semibold text-[#e6edf3]">{entry.institution}</h3><p className="text-xs text-[#9bacbf]">{entry.period}</p></div>
+                    <div><h3 className="font-display text-2xl font-semibold text-white">{entry.institution}</h3><p className="text-xs uppercase tracking-[0.24em] text-[#8a96a8]">{entry.period}</p></div>
                   </div>
-                  <ul className="mt-4 space-y-1.5">
-                    {entry.details.map(d => <li key={d} className="flex gap-2 text-[13px] text-[#c7d1de]"><span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#58a6ff]/30" />{d}</li>)}
+                  <ul className="mt-5 space-y-2">
+                    {entry.details.map(d => <li key={d} className="flex gap-2 text-sm leading-7 text-[#c7d1de]"><span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#58a6ff]/50" />{d}</li>)}
                   </ul>
-                  {entry.certificate && <p className="mt-4 rounded-md border border-[#21262d] bg-[#161b22] px-4 py-2.5 text-[13px] text-[#c9d1d9]">{entry.certificate}</p>}
-                  {entry.award && <div className="mt-2 flex gap-2 rounded-md border border-[#d29922]/20 bg-[#d29922]/5 px-4 py-2.5"><Award className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#d29922]" /><p className="text-[13px] text-[#e3b341]">{entry.award}</p></div>}
+                  {entry.certificate && <p className="mt-5 rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3 text-sm leading-7 text-[#e6edf3]">{entry.certificate}</p>}
+                  {entry.award && <div className="mt-3 flex gap-2 rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3"><Award className="mt-0.5 h-4 w-4 shrink-0 text-[#58a6ff]" /><p className="text-sm leading-7 text-[#c7d1de]">{entry.award}</p></div>}
                 </div>
                 </FadeIn>
               ))}
               <FadeIn>
-              <div className="rounded-lg border border-[#21262d] bg-[#010409] p-6">
-                <h3 className="font-semibold text-[#e6edf3]">Achievements</h3>
-                <ul className="mt-4 space-y-2">
+              <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-6">
+                <h3 className="font-display text-2xl font-semibold text-white">Achievements</h3>
+                <ul className="mt-5 space-y-3">
                   {portfolioData.achievements.map(a => (
-                    <li key={a} className="flex gap-2 rounded-md border border-[#d29922]/20 bg-[#d29922]/5 px-4 py-2.5 text-[13px] text-[#e3b341]">
-                      <Award className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#d29922]" />{a}
+                    <li key={a} className="flex gap-2 rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3 text-sm leading-7 text-[#c7d1de]">
+                      <Award className="mt-0.5 h-4 w-4 shrink-0 text-[#58a6ff]" />{a}
                     </li>
                   ))}
                 </ul>
@@ -774,49 +697,44 @@ export function PortfolioStatic() {
         <FadeIn>
         <section id="contact" className="py-20">
           <div className="mx-auto max-w-[1280px] px-6">
-            <div className="relative overflow-hidden rounded-xl border border-[#21262d] bg-[#161b22]">
-              {/* Glow bg */}
-              <div className="pointer-events-none absolute -right-20 -top-20 h-60 w-60 rounded-full bg-[#58a6ff]/[0.06] blur-[80px]" />
-              <div className="pointer-events-none absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-[#d2a8ff]/[0.04] blur-[80px]" />
+            <div className="grid gap-5 rounded-[32px] border border-white/10 bg-white/[0.03] p-6 md:grid-cols-[1.1fr_0.9fr] md:p-8">
+              <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#08111d] p-6 md:p-8">
+                <div className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full bg-[#58a6ff]/[0.08] blur-[70px]" />
+                <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-[#8a96a8]">Contact</p>
+                <h2 className="mt-4 max-w-md font-display text-[clamp(2.5rem,5vw,4.8rem)] font-semibold leading-[0.95] tracking-[-0.06em] text-white">Let&apos;s build together<span className="text-[#58a6ff]">.</span></h2>
+                <p className="mt-5 max-w-xl text-sm leading-7 text-[#c7d1de] md:text-base">Open for opportunities in Flutter, mobile, and super-app development. If you need someone who can ship with product thinking, let&apos;s talk.</p>
+                <a href={`mailto:${portfolioData.email}`} className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#010409] transition hover:-translate-y-0.5 hover:bg-[#f1f5f9]">
+                  <Mail className="h-4 w-4" />Send email
+                </a>
+              </div>
 
-              <div className="relative grid md:grid-cols-2">
-                <div className="p-10 md:p-14">
-                  <p className="text-sm font-semibold uppercase tracking-wider text-[#58a6ff]">Contact</p>
-                  <h2 className="mt-2 font-display text-3xl font-bold md:text-4xl">Let's build together<span className="gh-gradient-text">.</span></h2>
-                  <p className="mt-4 text-sm text-[#c7d1de]">Open for opportunities in Flutter, mobile, and super-app development.</p>
-                  <a href={`mailto:${portfolioData.email}`} className="mt-8 inline-flex items-center gap-2 rounded-md bg-[#58a6ff] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#79c0ff]">
-                    <Mail className="h-4 w-4" />Send Email
-                  </a>
-                </div>
-                <div className="border-t border-[#21262d] p-10 md:border-l md:border-t-0 md:p-14">
-                  <div className="space-y-4">
-                    {[
-                      { icon: Mail, label: 'Email', value: portfolioData.email, href: `mailto:${portfolioData.email}` },
-                      { icon: Phone, label: 'Phone', value: portfolioData.phone ?? '' },
-                      { icon: MapPin, label: 'Address', value: portfolioData.address, href: mapsUrl },
-                    ].map(item => (
-                      <div key={item.label} className="flex items-center gap-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-md border border-[#30363d] bg-[#010409]"><item.icon className="h-3.5 w-3.5 text-[#9bacbf]" /></div>
-                        <div>
-                          <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9bacbf]">{item.label}</p>
-                          {item.href ? <a href={item.href} target="_blank" rel="noreferrer" className="text-sm text-[#c7d1de] transition hover:text-[#58a6ff]">{item.value}</a> : <p className="text-sm text-[#c7d1de]">{item.value}</p>}
-                        </div>
-                      </div>
-                    ))}
-                    <div className="border-t border-[#21262d] pt-4">
-                      <p className="text-[10px] font-semibold uppercase tracking-wider text-[#9bacbf]">Social</p>
-                      <div className="mt-2 flex gap-2">
-                        {[
-                          { icon: Github, href: portfolioData.socials.github, label: 'GitHub' },
-                          { icon: Linkedin, href: portfolioData.socials.linkedin, label: 'LinkedIn' },
-                          { icon: Globe, href: portfolioData.socials.pubDev, label: 'Pub.dev' },
-                        ].map(s => (
-                          <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 rounded-md border border-[#30363d] bg-[#010409] px-3 py-2 text-xs text-[#c7d1de] transition hover:border-[#58a6ff]/30 hover:text-[#58a6ff]">
-                            <s.icon className="h-3.5 w-3.5" />{s.label}
-                          </a>
-                        ))}
-                      </div>
+              <div className="grid gap-3 self-start">
+                {[
+                  { icon: Mail, label: 'Email', value: portfolioData.email, href: `mailto:${portfolioData.email}` },
+                  { icon: Phone, label: 'Phone', value: portfolioData.phone ?? '' },
+                  { icon: MapPin, label: 'Address', value: portfolioData.address, href: mapsUrl },
+                ].map(item => (
+                  <div key={item.label} className="flex items-center gap-3 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5"><item.icon className="h-4 w-4 text-[#8a96a8]" /></div>
+                    <div className="min-w-0">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-[#8a96a8]">{item.label}</p>
+                      {item.href ? <a href={item.href} target="_blank" rel="noreferrer" className="mt-1 block truncate text-sm text-white transition hover:text-[#58a6ff]">{item.value}</a> : <p className="mt-1 text-sm text-white">{item.value}</p>}
                     </div>
+                  </div>
+                ))}
+
+                <div className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.32em] text-[#8a96a8]">Social</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {[
+                      { icon: Github, href: portfolioData.socials.github, label: 'GitHub' },
+                      { icon: Linkedin, href: portfolioData.socials.linkedin, label: 'LinkedIn' },
+                      { icon: Globe, href: portfolioData.socials.pubDev, label: 'Pub.dev' },
+                    ].map(s => (
+                      <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs text-white transition hover:bg-white/10">
+                        <s.icon className="h-3.5 w-3.5" />{s.label}
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -827,11 +745,11 @@ export function PortfolioStatic() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-[#21262d] py-10">
+      <footer className="border-t border-white/10 py-10">
         <div className="mx-auto flex max-w-[1280px] flex-col items-center gap-3 px-6 text-center">
-          <span className="font-display text-sm font-bold text-white">Nam<span className="gh-gradient-text">.</span></span>
-          <p className="text-sm text-[#9bacbf]">Designed & Developed with <span className="text-[#ff7b72]">❤️</span> by Nam</p>
-          <p className="text-xs text-[#30363d]">© 2026 {portfolioData.name}. All rights reserved.</p>
+          <span className="font-display text-sm font-bold text-white">Nam<span className="text-[#58a6ff]">.</span></span>
+          <p className="text-sm text-[#9bacbf]">Designed & developed with motion, contrast, and clarity.</p>
+          <p className="text-xs text-[#6b7280]">© 2026 {portfolioData.name}. All rights reserved.</p>
         </div>
       </footer>
 
